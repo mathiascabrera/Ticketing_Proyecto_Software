@@ -53,6 +53,7 @@ namespace Infrastructure.Persistence
                 .IsRequired();
 
             });
+
             modelBuilder.Entity<SECTOR>(entity =>
             {
                 entity.ToTable("SECTOR");
@@ -84,9 +85,8 @@ namespace Infrastructure.Persistence
 
                 entity.HasMany(e => e.SeatsList)
                 .WithOne(s => s.SectorObj)
-                .HasForeignKey(e => e.Id)
-                .IsRequired();
-
+                .HasForeignKey(e => e.SectorId)
+                .IsRequired(false);
             });
             modelBuilder.Entity<SEAT>(entity =>
             {
@@ -97,32 +97,33 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.Id)
                 .HasColumnType("uniqueidentifier")
                 .ValueGeneratedOnAdd();
-
+                
                 entity.HasOne(e => e.SectorObj)
-                .WithMany(e => e.SeatsList)
-                .HasForeignKey(e => e.Id)
-                .IsRequired();
+                .WithMany(s => s.SeatsList)
+                .HasForeignKey(e => e.SectorId)
+                .IsRequired(false);
 
                 entity.Property(e => e.RowIdentifier)
                 .IsRequired()
                 .HasMaxLength(2);
 
                 entity.Property(e => e.SeatNumber)
-                    .HasColumnType("int")
-                    .IsRequired();
+                .HasColumnType("int")
+                .IsRequired();
 
                 entity.Property(e => e.Status)
-                  .HasConversion<string>()
-                  .HasMaxLength(20)
-                  .IsRequired();
+                .HasConversion<string>()
+                .HasMaxLength(20)
+                .IsRequired();
 
                 entity.Property(e => e.Version)
-                    .HasColumnType("int")
+                .HasColumnType("int")
                 .IsRequired();
 
                 entity.HasOne(e => e.ReservationObj)
                 .WithOne(r => r.SeatObj)
-                .HasForeignKey<RESERVATION>();
+                .HasForeignKey<RESERVATION>()
+                .IsRequired(false);
             });
 
             modelBuilder.Entity<RESERVATION>(entity =>
@@ -148,7 +149,7 @@ namespace Infrastructure.Persistence
 
                 entity.HasOne(e => e.UserObj)
                 .WithMany(u => u.ReservationList)
-                .HasForeignKey(e => e.Id)
+                .HasForeignKey(e => e.UserId)
                 .IsRequired();
             });
 
@@ -175,13 +176,13 @@ namespace Infrastructure.Persistence
 
                 entity.HasMany(e => e.ReservationList)
                 .WithOne(r => r.UserObj)
-                .HasForeignKey(e => e.Id)
-                .IsRequired();
+                .HasForeignKey(e => e.UserId)
+                .IsRequired(false);
 
                 entity.HasMany(e => e.AuditLogList)
                 .WithOne(a => a.UserObj)
-                .HasForeignKey(e => e.Id)
-                .IsRequired();
+                .HasForeignKey(e => e.UserId)
+                .IsRequired(false);
             });
 
             modelBuilder.Entity<AUDIT_LOG>(entity =>
@@ -209,10 +210,13 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.CreatedAt)
                     .IsRequired();
 
+                entity.Property(e => e.UserId)
+                .IsRequired(false);
+
                 entity.HasOne(e => e.UserObj)
                 .WithMany(u => u.AuditLogList)
-                .HasForeignKey(e => e.Id)
-                .IsRequired();
+                .HasForeignKey(e => e.UserId)
+                .IsRequired(false);
             });
         }
     }

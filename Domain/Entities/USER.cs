@@ -12,7 +12,7 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public ICollection<RESERVATION> ReservationList { get; set; }
-        public ICollection<AUDIT_LOG> AuditLogList { get; set; }
+        public virtual ICollection<RESERVATION> ReservationList { get; set; }
+        public virtual ICollection<AUDIT_LOG> AuditLogList { get; set; }
     }
 }
