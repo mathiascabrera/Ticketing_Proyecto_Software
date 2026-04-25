@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class AUDIT_LOG
+    public class AuditLog
     {
         public Guid Id { get; set; }
         public int? UserId { get; set; }
@@ -15,7 +15,7 @@ namespace Domain.Entities
         public string EntityId { get; set; }
         public string Details { get; set; }
         public DateTime CreatedAt { get; set; }
-        public USER? UserObj { get; set; }
+        public User? UserObj { get; set; }
 
     }
 }

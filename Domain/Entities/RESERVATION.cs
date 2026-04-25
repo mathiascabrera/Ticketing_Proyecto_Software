@@ -12,7 +12,7 @@ namespace Domain.Entities
         Paid = 1,
         Expired = 2
     }
-    public class RESERVATION
+    public class Reservation
     {
         public Guid Id { get; set; }
         public int UserId { get; set; }
@@ -20,7 +20,7 @@ namespace Domain.Entities
         public ReservationStatus Status { get; set; }
         public DateTime ReservedAt { get; set; }
         public DateTime ExpiresAt { get; set; }
-        public USER UserObj { get; set; }
-        public SEAT SeatObj { get; set; }
+        public User UserObj { get; set; }
+        public Seat SeatObj { get; set; }
     }
 }

@@ -17,18 +17,18 @@ namespace Infrastructure.Persistence
 {
     public class AppDbContext:DbContext
     {
-        public DbSet<EVENT> Events { get; set; }
-        public DbSet<SECTOR> Sectors { get; set; }
-        public DbSet<SEAT> Seats { get; set; }
-        public DbSet<RESERVATION> Reservations { get; set; }
-        public DbSet<USER> Users { get; set; }
-        public DbSet<AUDIT_LOG> Audits { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Sector> Sectors { get; set; }
+        public DbSet<Seat> Seats { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<AuditLog> Audits { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<EVENT>(entity =>
+            modelBuilder.Entity<Event>(entity =>
             {
                 entity.ToTable("EVENT");
 
@@ -52,9 +52,18 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(e => e.EventId)
                 .IsRequired();
 
+                entity.HasData
+                (new Event
+                {
+                    Id = 1,
+                    Name = "Movie",
+                    EventDate = new DateTime(2026, 07, 28),
+                    Venue = "The Hobbit",
+                    Status = "Available"
+                });
             });
 
-            modelBuilder.Entity<SECTOR>(entity =>
+            modelBuilder.Entity<Sector>(entity =>
             {
                 entity.ToTable("SECTOR");
 
@@ -87,8 +96,26 @@ namespace Infrastructure.Persistence
                 .WithOne(s => s.SectorObj)
                 .HasForeignKey(e => e.SectorId)
                 .IsRequired(false);
+
+                entity.HasData
+                (new Sector
+                {
+                    Id = 1,
+                    EventId = 1,
+                    Name = "VIP",
+                    Price = 800,
+                    Capacity = 100
+                },
+                new Sector
+                {
+                    Id = 2,
+                    EventId = 1,
+                    Name = "NORMAL",
+                    Price = 450,
+                    Capacity = 1000
+                });
             });
-            modelBuilder.Entity<SEAT>(entity =>
+            modelBuilder.Entity<Seat>(entity =>
             {
                 entity.ToTable("SEAT");
 
@@ -122,11 +149,851 @@ namespace Infrastructure.Persistence
 
                 entity.HasOne(e => e.ReservationObj)
                 .WithOne(r => r.SeatObj)
-                .HasForeignKey<RESERVATION>()
+                .HasForeignKey<Reservation>()
                 .IsRequired(false);
+
+                entity.HasData
+                (new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "A",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "B",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+
+
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "C",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "D",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 1,
+                    RowIdentifier = "E",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "A",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "B",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+
+
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "C",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "D",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+
+
+
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 1,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 2,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 3,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 4,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 5,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 6,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 7,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 8,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 9,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                },
+                new Seat
+                {
+                    SectorId = 2,
+                    RowIdentifier = "E",
+                    SeatNumber = 10,
+                    Status = (SeatStatus)0,
+                    Version = 0
+                }
+
+
+
+
+
+                );
             });
 
-            modelBuilder.Entity<RESERVATION>(entity =>
+            modelBuilder.Entity<Reservation>(entity =>
             {
                 entity.ToTable("RESERVATION");
 
@@ -153,7 +1020,7 @@ namespace Infrastructure.Persistence
                 .IsRequired();
             });
 
-            modelBuilder.Entity<USER>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("USER");
 
@@ -185,7 +1052,7 @@ namespace Infrastructure.Persistence
                 .IsRequired(false);
             });
 
-            modelBuilder.Entity<AUDIT_LOG>(entity =>
+            modelBuilder.Entity<AuditLog>(entity =>
             {
                 entity.ToTable("AUDIT_LOG");
 

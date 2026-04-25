@@ -3,16 +3,29 @@
   "WorkspaceRootPath": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\TicketApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\domain\\entities\\sector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\domain\\entities\\seat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1FF2CC55-4BC1-43D8-A507-CF9F6A19FCE3}|..\\Infrastructure\\Infrastructure.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\infrastructure\\persistence\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\domain\\entities\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1FF2CC55-4BC1-43D8-A507-CF9F6A19FCE3}|..\\Infrastructure\\Infrastructure.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\infrastructure\\persistence\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\domain\\entities\\seat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\domain\\entities\\sector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\domain\\entities\\auditlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\domain\\entities\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\ticketapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|solutionrelative:controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 1\\ticketing_proyecto_software\\ticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -32,58 +45,58 @@
       "DocumentGroups": [
         {
           "DockedHeight": 174,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SEAT.cs",
-              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\SEAT.cs",
-              "RelativeDocumentMoniker": "..\\Domain\\Entities\\SEAT.cs",
-              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\SEAT.cs",
-              "RelativeToolTip": "..\\Domain\\Entities\\SEAT.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAAABEAAAAbAAAA",
+              "DocumentIndex": 7,
+              "Title": "EventsController.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\TicketApi\\Controllers\\EventsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EventsController.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\TicketApi\\Controllers\\EventsController.cs",
+              "RelativeToolTip": "Controllers\\EventsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T19:32:15.29Z",
+              "WhenOpened": "2026-04-25T01:39:04.058Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SECTOR.cs",
-              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\SECTOR.cs",
-              "RelativeDocumentMoniker": "..\\Domain\\Entities\\SECTOR.cs",
-              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\SECTOR.cs",
-              "RelativeToolTip": "..\\Domain\\Entities\\SECTOR.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAyAAAA",
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "..\\Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\User.cs",
+              "RelativeToolTip": "..\\Domain\\Entities\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T19:21:32.787Z",
+              "WhenOpened": "2026-04-25T01:18:56.88Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Infrastructure\\Persistence\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "..\\Infrastructure\\Persistence\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Infrastructure\\Persistence\\AppDbContext.cs",
-              "RelativeToolTip": "..\\Infrastructure\\Persistence\\AppDbContext.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAAAMEAAAAqAAAA",
+              "DocumentIndex": 5,
+              "Title": "Reservation.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\Reservation.cs",
+              "RelativeDocumentMoniker": "..\\Domain\\Entities\\Reservation.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\Reservation.cs",
+              "RelativeToolTip": "..\\Domain\\Entities\\Reservation.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAAAgAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T19:10:31.282Z",
+              "WhenOpened": "2026-04-25T01:17:03.653Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EVENT.cs",
-              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\EVENT.cs",
-              "RelativeDocumentMoniker": "..\\Domain\\Entities\\EVENT.cs",
-              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\EVENT.cs",
-              "RelativeToolTip": "..\\Domain\\Entities\\EVENT.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAIAAAA",
+              "DocumentIndex": 4,
+              "Title": "AuditLog.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\AuditLog.cs",
+              "RelativeDocumentMoniker": "..\\Domain\\Entities\\AuditLog.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\AuditLog.cs",
+              "RelativeToolTip": "..\\Domain\\Entities\\AuditLog.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T19:09:07.619Z",
+              "WhenOpened": "2026-04-25T01:16:19.713Z",
               "EditorCaption": ""
             },
             {
@@ -92,7 +105,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "Sector.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\Sector.cs",
+              "RelativeDocumentMoniker": "..\\Domain\\Entities\\Sector.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\Sector.cs",
+              "RelativeToolTip": "..\\Domain\\Entities\\Sector.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T19:21:32.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Seat.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\Seat.cs",
+              "RelativeDocumentMoniker": "..\\Domain\\Entities\\Seat.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\Seat.cs",
+              "RelativeToolTip": "..\\Domain\\Entities\\Seat.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAAA8AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T19:32:15.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "RelativeToolTip": "..\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAAADoAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T19:10:31.282Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\Event.cs",
+              "RelativeDocumentMoniker": "..\\Domain\\Entities\\Event.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\Domain\\Entities\\Event.cs",
+              "RelativeToolTip": "..\\Domain\\Entities\\Event.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T19:09:07.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 1\\Ticketing_Proyecto_Software\\TicketApi\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -100,12 +165,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T15:18:11.246Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-24T15:18:11.246Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "AUDIT_LOG.cs",
               "DocumentMoniker": "C:\\Users\\Compumar\\source\\repos\\Domain\\Entities\\AUDIT_LOG.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\source\\repos\\Domain\\Entities\\AUDIT_LOG.cs",
@@ -113,12 +177,11 @@
               "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\source\\repos\\Domain\\Entities\\AUDIT_LOG.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-23T14:34:24.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-23T14:34:24.57Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "USER.cs",
               "DocumentMoniker": "C:\\Users\\Compumar\\source\\repos\\Domain\\Entities\\USER.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\source\\repos\\Domain\\Entities\\USER.cs",
@@ -126,8 +189,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\source\\repos\\Domain\\Entities\\USER.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-23T14:34:04.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-23T14:34:04.999Z"
             }
           ]
         }

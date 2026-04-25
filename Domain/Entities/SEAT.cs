@@ -12,7 +12,7 @@ namespace Domain.Entities
         Reserved = 1,
         Sold = 2
     }
-    public class SEAT
+    public class Seat
     {
         public Guid Id { get; set; }
         public int SectorId { get; set; }
@@ -20,7 +20,7 @@ namespace Domain.Entities
         public int SeatNumber { get; set; }
         public SeatStatus Status { get; set; }
         public int Version { get; set; }
-        public virtual SECTOR SectorObj { get; set; }
-        public RESERVATION? ReservationObj { get; set; }
+        public virtual Sector SectorObj { get; set; }
+        public Reservation? ReservationObj { get; set; }
     }
 }
