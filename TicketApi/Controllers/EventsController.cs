@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.UseCases.Events.Queries;
+using Microsoft.AspNetCore.Mvc;
+using Application.Interfaces;
+using Infrastructure.Persistence.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +11,25 @@ namespace TicketApi.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        // GET: api/<EventsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        private readonly IGetEventSeatsHandler _handler;
+        private readonly IGetEventsHandler _eventshandler;
+
+        public EventsController(
+            IGetEventSeatsHandler handler,
+            IGetEventsHandler eventshandler)
         {
-            return new string[] { "value1", "value2" };
+            _handler = handler;
+            _eventshandler = eventshandler;
+        }
+
+
+        // GET: api/events
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _eventshandler.Handle(new GetEventsQuery());
+            return Ok(result);
         }
 
         // GET api/<EventsController>/5
@@ -39,5 +56,19 @@ namespace TicketApi.Controllers
         public void Delete(int id)
         {
         }
+
+        // evento 
+        [HttpGet("{id}/seats")]
+        public async Task<IActionResult> GetSeats(int id)
+        {
+ 
+            var result = await _handler.Handle(new GetEventSeatsQuery(id));
+
+            return Ok(result);
+        }
+        
+
+
+
     }
 }
