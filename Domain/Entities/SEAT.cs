@@ -20,7 +20,7 @@ namespace Domain.Entities
         public int SeatNumber { get; set; }
         public SeatStatus Status { get; set; }
         public int Version { get; set; }
-        public virtual Sector SectorObj { get; set; }
+        public Sector SectorObj { get; set; }
         public Reservation? ReservationObj { get; set; }
     }
 }

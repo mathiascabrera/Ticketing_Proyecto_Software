@@ -11,11 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="DTOs\" />
     <Folder Include="UseCases\Events\Commands\" />
-    <Folder Include="UseCases\Events\Handlers\" />
-    <Folder Include="UseCases\Events\Queries\" />
+    <Folder Include="UseCases\Reservations\Queries\" />
+    <Folder Include="UseCases\Seats\Commands\" />
   </ItemGroup>
 
 </Project>

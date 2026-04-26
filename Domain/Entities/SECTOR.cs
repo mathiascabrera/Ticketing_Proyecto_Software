@@ -13,7 +13,7 @@ namespace Domain.Entities
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Capacity { get; set; }
-        public virtual Event EventObj { get; set; }
+        public Event EventObj { get; set; }
         public virtual ICollection<Seat> SeatsList { get; set; }
     }
 }
