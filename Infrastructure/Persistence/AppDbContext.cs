@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 using System.Reflection.Metadata;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Infrastructure.Persistence
 {
@@ -26,7 +27,13 @@ namespace Infrastructure.Persistence
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) // saque todos los hasdata que rompian aca (joni)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ConfigureWarnings(warnings =>
+            warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Event>(entity =>
             {
@@ -52,7 +59,15 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(e => e.EventId)
                 .IsRequired();
 
-
+                entity.HasData
+                (new Event
+                {
+                    Id = 1,
+                    Name = "Movie",
+                    EventDate = new DateTime(2026, 07, 28),
+                    Venue = "The Hobbit",
+                    Status = "Available"
+                });
             });
 
             modelBuilder.Entity<Sector>(entity =>
@@ -88,6 +103,24 @@ namespace Infrastructure.Persistence
                 .WithOne(s => s.SectorObj)
                 .HasForeignKey(e => e.SectorId)
                 .IsRequired(false);
+
+                entity.HasData
+                (new Sector
+                {
+                    Id = 1,
+                    EventId = 1,
+                    Name = "VIP",
+                    Price = 800,
+                    Capacity = 100
+                },
+                new Sector
+                {
+                    Id = 2,
+                    EventId = 1,
+                    Name = "NORMAL",
+                    Price = 450,
+                    Capacity = 1000
+                });
 
             });
             modelBuilder.Entity<Seat>(entity =>
@@ -127,7 +160,27 @@ namespace Infrastructure.Persistence
                     .HasForeignKey<Reservation>()
                     .IsRequired(false);
 
-             //   entity.HasData(seats);
+                for (int sector = 1; sector < 3; sector++)
+                {
+                    for (int seat = 1; seat < 6; seat++)
+                    {
+                        for (char row = 'A'; row <= 'E'; row++)
+                        {
+                            entity.HasData
+                            (
+                                new Seat
+                                {
+                                    Id = Guid.Parse(Guid.NewGuid().ToString()),
+                                    SectorId = sector,
+                                    RowIdentifier = row.ToString(),
+                                    SeatNumber = seat,
+                                    Status = 0,
+                                    Version = 0
+                                }
+                            );
+                        }
+                    }
+                }
             });
 
             modelBuilder.Entity<Reservation>(entity =>
