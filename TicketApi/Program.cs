@@ -1,5 +1,7 @@
 using Application.Interfaces;
 using Application.UseCases.Events.Handlers;
+using Application.UseCases.Reservations.Commands;
+using Application.UseCases.Reservations.Handlers;
 using Application.UsesCases.Reservations.Commands;
 using Application.UsesCases.Reservations.Handlers;
 using Application.UsesCases.Seats.Handlers;
@@ -44,17 +46,32 @@ builder.Services.AddScoped<ISeatRepository, SeatRepository>();                  
 builder.Services.AddScoped<IGetSeatByIdHandler, GetSeatByIdHandler>();          //
 builder.Services.AddScoped<IGetAllSeatsHandler, GetAllSeatsHandler>();          // inteccion dependencias 
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();    //       
-builder.Services.AddScoped<IReserveSeatCommand, ReserveSeatCommand>();          //
+builder.Services.AddScoped<IReserveSeatCommand, ReserveSeatCommand>();
+builder.Services.AddScoped<IConfirmSeatCommand, ConfirmSeatCommand>();
+builder.Services.AddScoped<IConfirmSeatHandler, ConfirmSeatHandler>();
 builder.Services.AddScoped<IReserveSeatHandler, ReserveSeatHandler>();          //
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IGetEventSeatsHandler, GetEventSeatsHandler>();
 builder.Services.AddScoped<IGetEventsHandler, GetEventsHandler>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));/// cambio base de datos
 
+
+builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 var app = builder.Build();
+app.UseCors("AllowAll");
 
 
 
@@ -125,7 +142,6 @@ using (var scope = app.Services.CreateScope())
                         RowIdentifier = row.ToString(),
                         SeatNumber = num,
                         Status = SeatStatus.Available,
-                        Version = 0
                     });
                 }
             }
