@@ -7,7 +7,7 @@ using Infrastructure.Persistence.Repositories;
 
 namespace TicketApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/")]
     [ApiController]
     public class EventsController : ControllerBase
     {
@@ -24,8 +24,7 @@ namespace TicketApi.Controllers
         }
 
 
-        // GET: api/events
-        [HttpGet]
+        [HttpGet("events")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _eventshandler.Handle(new GetEventsQuery());

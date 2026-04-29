@@ -20,6 +20,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy.WithOrigins("http://127.0.0.1:5501")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+
+
+
+
 var connectionString = builder.Configuration["ConnectionString"];
 //builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString)); from mathias
 
@@ -39,6 +55,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));/// cambio base de datos
 
 var app = builder.Build();
+
+
+
+
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -124,6 +145,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("FrontendPolicy");
 
 app.UseAuthorization();
 
