@@ -23,7 +23,7 @@ namespace Infrastructure.Persistence
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<AuditLog> Audits { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -151,9 +151,12 @@ namespace Infrastructure.Persistence
                     .HasMaxLength(20)
                     .IsRequired();
 
-                entity.Property(e => e.Version)
-                    .HasColumnType("int")
-                    .IsRequired();
+           //     entity.Property(e => e.RowVersion)    para concurrencia mas adelante 
+           //        .IsRowVersion();
+
+                entity.Property(s => s.Version)
+                .HasColumnType("int")
+                .IsRequired();
 
                 entity.HasOne(e => e.ReservationObj)
                     .WithOne(r => r.SeatObj)
@@ -275,6 +278,7 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(e => e.UserId)
                 .IsRequired(false);
             });
+
         }
     }
 }

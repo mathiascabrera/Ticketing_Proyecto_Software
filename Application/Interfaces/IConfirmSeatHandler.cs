@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.DTOs;
+using Application.UseCases.Reservations.Commands;
 using Application.UsesCases.Reservations.Commands;
 
 namespace Application.Interfaces
 {
-    public interface IReserveSeatHandler
+    public interface IConfirmSeatHandler
     {
-        public Task<ReserveSeatResponse> Handle(ReserveSeatCommand command);
+        public Task<ConfirmSeatResponse> Handle(ConfirmSeatCommand command);
     }
 }

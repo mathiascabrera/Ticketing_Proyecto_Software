@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain.Entities;
+using Domain.Exeptions;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,8 +31,15 @@ namespace Infrastructure.Repositories
         }
         public async Task UpdateAsync(Seat seat)
         {
-            _context.Seats.Update(seat);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Seats.Update(seat);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ConcurrencyException();
+            }
         }
         public async Task<List<Seat>> GetSeatsByEventIdAsync(int eventId)
         {
