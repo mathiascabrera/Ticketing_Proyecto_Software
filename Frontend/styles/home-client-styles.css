@@ -1,10 +1,18 @@
 .nav-client{
-    justify-content: flex-start
+    justify-content: flex-end;
 }
 
+.close-sesion{
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    margin-right: 2rem;
+}
 
-
-
+.close-sesion:hover{
+    font-weight: bold;
+    transition: .2s;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -12,7 +20,6 @@
 }
 
 .events-filter {
-    /* background-color: red; */
     display: flex;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-xl);
@@ -112,6 +119,14 @@
 
 .event-content {
     padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+}
+
+.button-buy-ticket{
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 1rem;
 }
 
 .event-description {

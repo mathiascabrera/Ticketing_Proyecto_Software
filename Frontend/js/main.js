@@ -7,7 +7,38 @@ let filteredEvents = [];
 
 const API_BASE_URL = 'http://localhost:5026';
 
+
+
+
+
+const toastElList = document.querySelectorAll('.toast')
+const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option))
+
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', async () => {
+    
     await loadEvents();
     
     // Event listeners

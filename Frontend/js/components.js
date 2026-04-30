@@ -28,6 +28,7 @@ export function createEventCard(event) {
                     ${sectorsHtml}
                 </div>
             </div>
+            <button type="button" class="btn btn-success button-buy-ticket">Buy ticket</button>
         </div>
     `;
     
