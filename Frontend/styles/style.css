@@ -1,3 +1,25 @@
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #64748b;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --border-radius: 0.5rem;
+    --transition: all 0.2s ease-in-out;
+}
 * {
     font-family: "Arimo";
     margin: 0;
@@ -7,7 +29,8 @@ html {
     scroll-behavior: smooth;
     font-size: 62.5%;
 }
-.navindex{
+.navindex,
+.nav-client{
     position: fixed;
     top: 0;
     left: 0;
@@ -18,9 +41,17 @@ html {
     align-items: center;
     justify-content: flex-end;
 }
-.nav-container{
+.nav-container,
+.nav-container-client{
     display: flex;
     justify-content: flex-end;
+}
+.arrow-a{
+    margin-left: 2rem;
+}
+.arrow-icon{
+    color: white;
+    font-size: 4rem;
 }
 .mainindex{
     display: flex;
