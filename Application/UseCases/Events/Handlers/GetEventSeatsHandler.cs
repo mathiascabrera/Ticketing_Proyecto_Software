@@ -28,7 +28,8 @@ namespace Application.UseCases.Events.Handlers
                 Id = s.Id, // si tu Id es int en DB (ajustar si ya es Guid)
                 RowIdentifier = s.RowIdentifier,
                 SeatNumber = s.SeatNumber,
-                Status = s.Status
+                Status = s.Status,
+                Sector = s.SectorId
             }).ToList();
         }
     }

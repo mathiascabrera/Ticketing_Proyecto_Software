@@ -13,5 +13,6 @@ namespace Application.DTOs
         public required string RowIdentifier { get; set; }
         public int SeatNumber { get; set; }
         public SeatStatus Status { get; set; }
+        public int Sector { get; set; }
     }
 }
