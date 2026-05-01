@@ -25,7 +25,7 @@ namespace Application.UseCases.Events.Handlers
 
             return seats.Select(s => new SeatResponse
             {
-                Id = s.Id, // si tu Id es int en DB (ajustar si ya es Guid)
+                Id = s.Id, //
                 RowIdentifier = s.RowIdentifier,
                 SeatNumber = s.SeatNumber,
                 Status = s.Status,

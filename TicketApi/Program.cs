@@ -1,5 +1,6 @@
 using Application.Interfaces;
 using Application.UseCases.Events.Handlers;
+using Application.UseCases.Events.Queries;
 using Application.UseCases.Reservations.Commands;
 using Application.UseCases.Reservations.Handlers;
 using Application.UsesCases.Reservations.Commands;
@@ -74,84 +75,9 @@ var app = builder.Build();
 app.UseCors("AllowAll");
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-
-
-    if (!context.Users.Any())
-    {
-        var user = new User
-        {
-            Name = "Test User",
-            Email = "test@test.com",
-            PasswordHash = "1234"
-        };
-
-        context.Users.Add(user);
-        context.SaveChanges();
-    }
-
-    if (!context.Events.Any())
-    {
-        var evento = new Event
-        {
-            Name = "Concierto Rock",
-            EventDate = DateTime.UtcNow.AddMonths(1),
-            Venue = "Estadio Central",
-            Status = "Active"
-        };
-
-        context.Events.Add(evento);
-        context.SaveChanges();
-
-        var sectorA = new Sector
-        {
-            Name = "Platea A",
-            Price = 10000,
-            Capacity = 50,
-            EventId = evento.Id
-        };
-
-        var sectorB = new Sector
-        {
-            Name = "Platea B",
-            Price = 8000,
-            Capacity = 50,
-            EventId = evento.Id
-        };
-
-        context.Sectors.AddRange(sectorA, sectorB);
-        context.SaveChanges();
-
-        foreach (var sector in new[] { sectorA, sectorB })
-        {
-            for (char row = 'A'; row <= 'E'; row++)
-            {
-                for (int num = 1; num <= 10; num++)
-                {
-                    context.Seats.Add(new Seat
-                    {
-                        Id = Guid.NewGuid(),
-                        SectorId = sector.Id,
-                        RowIdentifier = row.ToString(),
-                        SeatNumber = num,
-                        Status = SeatStatus.Available,
-                    });
-                }
-            }
-        }
-
-        context.SaveChanges();
-    }
-}
-
-
+// donde estaba la precarga
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

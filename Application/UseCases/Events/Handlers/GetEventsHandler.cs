@@ -28,6 +28,7 @@ namespace Application.UseCases.Events.Handlers
                 Id = e.Id,
                 Name = e.Name,
                 EventDate = e.EventDate,
+            //    ImangenUrl= e.ImageUrl,    por si llegamos con la imagen
                 Sectors = e.SectorsList?.Select(s => new SectorResponse
                 {
                     Id = s.Id,
