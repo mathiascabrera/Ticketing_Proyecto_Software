@@ -1,0 +1,242 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\TicketApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{55140E56-CD6D-4DF8-83DE-D02831AF6C52}|..\\Application\\Application.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\application\\usecases\\events\\handlers\\geteventshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55140E56-CD6D-4DF8-83DE-D02831AF6C52}|..\\Application\\Application.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\application\\usecases\\events\\queries\\geteventsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FF2CC55-4BC1-43D8-A507-CF9F6A19FCE3}|..\\Infrastructure\\Infrastructure.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\infrastructure\\migrations\\20260501190256_addeventimageurlandprecharge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FF2CC55-4BC1-43D8-A507-CF9F6A19FCE3}|..\\Infrastructure\\Infrastructure.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\infrastructure\\migrations\\20260501192245_seeduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FF2CC55-4BC1-43D8-A507-CF9F6A19FCE3}|..\\Infrastructure\\Infrastructure.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\infrastructure\\persistence\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55140E56-CD6D-4DF8-83DE-D02831AF6C52}|..\\Application\\Application.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\application\\dtos\\eventresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\ticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06BDC3D6-427B-4D52-B90D-730578F2C8AF}|..\\Domain\\Domain.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\domain\\entities\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FF2CC55-4BC1-43D8-A507-CF9F6A19FCE3}|..\\Infrastructure\\Infrastructure.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\infrastructure\\migrations\\20260427160716_init.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\ticketapi\\controllers\\reservationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|solutionrelative:controllers\\reservationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\ticketapi\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|solutionrelative:controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55140E56-CD6D-4DF8-83DE-D02831AF6C52}|..\\Application\\Application.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\application\\usecases\\events\\queries\\geteventseatsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55140E56-CD6D-4DF8-83DE-D02831AF6C52}|..\\Application\\Application.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\application\\usecases\\events\\handlers\\geteventseatshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55140E56-CD6D-4DF8-83DE-D02831AF6C52}|..\\Application\\Application.csproj|c:\\users\\frenchi\\onedrive\\desktop\\prueba\\nueva carpeta\\application\\dtos\\seatresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 174,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ReservationsController.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\TicketApi\\Controllers\\ReservationsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReservationsController.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\TicketApi\\Controllers\\ReservationsController.cs",
+              "RelativeToolTip": "Controllers\\ReservationsController.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAkwEYAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:57:56.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "EventsController.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\TicketApi\\Controllers\\EventsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EventsController.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\TicketApi\\Controllers\\EventsController.cs",
+              "RelativeToolTip": "Controllers\\EventsController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAwwD8AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:39:51.701Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Domain\\Entities\\Event.cs",
+              "RelativeDocumentMoniker": "..\\Domain\\Entities\\Event.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Domain\\Entities\\Event.cs",
+              "RelativeToolTip": "..\\Domain\\Entities\\Event.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:28:23.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "20260501190256_AddEventImageUrlAndPreCharge.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Infrastructure\\Migrations\\20260501190256_AddEventImageUrlAndPreCharge.cs",
+              "RelativeDocumentMoniker": "..\\Infrastructure\\Migrations\\20260501190256_AddEventImageUrlAndPreCharge.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Infrastructure\\Migrations\\20260501190256_AddEventImageUrlAndPreCharge.cs",
+              "RelativeToolTip": "..\\Infrastructure\\Migrations\\20260501190256_AddEventImageUrlAndPreCharge.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T19:02:56.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GetEventsHandler.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\UseCases\\Events\\Handlers\\GetEventsHandler.cs",
+              "RelativeDocumentMoniker": "..\\Application\\UseCases\\Events\\Handlers\\GetEventsHandler.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\UseCases\\Events\\Handlers\\GetEventsHandler.cs",
+              "RelativeToolTip": "..\\Application\\UseCases\\Events\\Handlers\\GetEventsHandler.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAywCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T19:09:12.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EventResponse.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\DTOs\\EventResponse.cs",
+              "RelativeDocumentMoniker": "..\\Application\\DTOs\\EventResponse.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\DTOs\\EventResponse.cs",
+              "RelativeToolTip": "..\\Application\\DTOs\\EventResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T19:10:06.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetEventsQuery.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\UseCases\\Events\\Queries\\GetEventsQuery.cs",
+              "RelativeDocumentMoniker": "..\\Application\\UseCases\\Events\\Queries\\GetEventsQuery.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\UseCases\\Events\\Queries\\GetEventsQuery.cs",
+              "RelativeToolTip": "..\\Application\\UseCases\\Events\\Queries\\GetEventsQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:02:00.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20260501192245_SeedUser.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Infrastructure\\Migrations\\20260501192245_SeedUser.cs",
+              "RelativeDocumentMoniker": "..\\Infrastructure\\Migrations\\20260501192245_SeedUser.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Infrastructure\\Migrations\\20260501192245_SeedUser.cs",
+              "RelativeToolTip": "..\\Infrastructure\\Migrations\\20260501192245_SeedUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T19:22:45.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\TicketApi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\TicketApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAAAFgAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:04:40.384Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "RelativeToolTip": "..\\Infrastructure\\Persistence\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:01:34.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20260427160716_init.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Infrastructure\\Migrations\\20260427160716_init.Designer.cs",
+              "RelativeDocumentMoniker": "..\\Infrastructure\\Migrations\\20260427160716_init.Designer.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Infrastructure\\Migrations\\20260427160716_init.Designer.cs",
+              "RelativeToolTip": "..\\Infrastructure\\Migrations\\20260427160716_init.Designer.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwA8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:58:17.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GetEventSeatsQuery.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\UseCases\\Events\\Queries\\GetEventSeatsQuery.cs",
+              "RelativeDocumentMoniker": "..\\Application\\UseCases\\Events\\Queries\\GetEventSeatsQuery.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\UseCases\\Events\\Queries\\GetEventSeatsQuery.cs",
+              "RelativeToolTip": "..\\Application\\UseCases\\Events\\Queries\\GetEventSeatsQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:03:42.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GetEventSeatsHandler.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\UseCases\\Events\\Handlers\\GetEventSeatsHandler.cs",
+              "RelativeDocumentMoniker": "..\\Application\\UseCases\\Events\\Handlers\\GetEventSeatsHandler.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\UseCases\\Events\\Handlers\\GetEventSeatsHandler.cs",
+              "RelativeToolTip": "..\\Application\\UseCases\\Events\\Handlers\\GetEventSeatsHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T22:24:39.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SeatResponse.cs",
+              "DocumentMoniker": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\DTOs\\SeatResponse.cs",
+              "RelativeDocumentMoniker": "..\\Application\\DTOs\\SeatResponse.cs",
+              "ToolTip": "C:\\Users\\frenchi\\OneDrive\\Desktop\\prueba\\Nueva carpeta\\Application\\DTOs\\SeatResponse.cs",
+              "RelativeToolTip": "..\\Application\\DTOs\\SeatResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-30T22:22:56.011Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
