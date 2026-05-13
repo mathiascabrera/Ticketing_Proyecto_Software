@@ -3,11 +3,13 @@ using Application.UsesCases.Seats.Handlers;
 using Application.UsesCases.Seats.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api4.Controllers          ///////////Query/Command = datos (no comportamiento)
                                     ///////////Interfaces se usan para abstraer comportamiento osea handler
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class SeatsController : ControllerBase
     {

@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces;
 using Infrastructure.Persistence.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TicketApi.Controllers
 {
     [Route("api/v1/")]
+    [Authorize]
     [ApiController]
     public class EventsController : ControllerBase
     {

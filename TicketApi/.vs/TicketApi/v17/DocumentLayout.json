@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\TicketApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 2\\ticketing_proyecto_software\\ticketapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 2\\ticketing_proyecto_software\\ticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\TicketApi\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\TicketApi\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAAA4AAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T18:29:25.315Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\TicketApi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\TicketApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAAADIAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T18:01:50.617Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
