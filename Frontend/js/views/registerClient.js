@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             const result = await authService.register(userData);
-            console.log(result)
             
             if (result.success) {
                 showNotification(result.data.message || 'Registro exitoso', 'success');

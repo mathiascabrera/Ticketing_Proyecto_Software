@@ -62,7 +62,7 @@ namespace TicketApi.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var user = await _userManager.FindByNameAsync(dto.UserName);
+            var user = await _userManager.FindByEmailAsync(dto.Email);
 
             if (user == null)
                 return Unauthorized("Usuario no existe");

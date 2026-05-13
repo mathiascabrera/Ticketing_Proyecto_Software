@@ -7,6 +7,9 @@
       "RelativeMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{55140E56-CD6D-4DF8-83DE-D02831AF6C52}|..\\Application\\Application.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 2\\ticketing_proyecto_software\\application\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|c:\\users\\compumar\\desktop\\facultad\\2026\\proyecto software\\tp individual 2\\ticketing_proyecto_software\\ticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47131981-8059-4851-BB77-B2061B7C3AB2}|TicketApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -18,11 +21,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\Application\\DTOs\\LoginDto.cs",
+              "RelativeDocumentMoniker": "..\\Application\\DTOs\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\Application\\DTOs\\LoginDto.cs",
+              "RelativeToolTip": "..\\Application\\DTOs\\LoginDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T22:02:46.683Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -32,14 +48,14 @@
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\TicketApi\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAAAA4AAAAkAAAA",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAAAFQAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-13T18:29:25.315Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Compumar\\Desktop\\Facultad\\2026\\Proyecto Software\\TP Individual 2\\Ticketing_Proyecto_Software\\TicketApi\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -47,8 +63,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAABoAAAAAAAAAAAAAADIAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T18:01:50.617Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-13T18:01:50.617Z"
             }
           ]
         }
