@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.DTOs;
 using Application.Interfaces;
-using Application.UseCases.Events.Queries;
+using Application.UsesCases.Events.Queries;
 using Domain.Entities;
 
-namespace Application.UseCases.Events.Handlers
+namespace Application.UsesCases.Events.Handlers
 {
     public class GetEventSeatsHandler : IGetEventSeatsHandler
     {

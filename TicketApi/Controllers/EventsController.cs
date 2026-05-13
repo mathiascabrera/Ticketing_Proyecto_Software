@@ -1,4 +1,4 @@
-﻿using Application.UseCases.Events.Queries;
+﻿using Application.UsesCases.Events.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces;
 using Infrastructure.Persistence.Repositories;
@@ -23,7 +23,9 @@ namespace TicketApi.Controllers
             _eventshandler = eventshandler;
         }
 
-
+        // -------------------------
+        // GET ALL EVENT
+        // -------------------------
         [HttpGet("events")]
         public async Task<IActionResult> GetAll()
         {
@@ -31,32 +33,42 @@ namespace TicketApi.Controllers
             return Ok(result);
         }
 
-        // GET api/<EventsController>/5
+        // -------------------------
+        // GET EVENT BY ID      (NO IMPLEMENTADO)
+        // -------------------------
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<EventsController>
+        // -------------------------
+        // CREATE EVENT         (NO IMPLEMENTADO)
+        // -------------------------
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<EventsController>/5
+        // -------------------------
+        // ACTUALIZAR EVENT BY ID   (NO IMPLEMENTADO)
+        // -------------------------
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<EventsController>/5
+        // -------------------------
+        // DELETE EVENT     (NO IMPLEMENTADO)
+        // -------------------------
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
         }
 
-        // evento 
+        // -------------------------
+        // GET SEATS FROM EVENT BY ID 
+        // -------------------------
         [HttpGet("{id}/seats")]
         public async Task<IActionResult> GetSeats(int id)
         {

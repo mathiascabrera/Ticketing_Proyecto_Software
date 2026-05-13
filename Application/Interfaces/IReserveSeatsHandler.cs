@@ -8,8 +8,8 @@ using Application.UsesCases.Reservations.Commands;
 
 namespace Application.Interfaces
 {
-    public interface IReserveSeatHandler
+    public interface IReserveSeatsHandler
     {
-        public Task<ReserveSeatResponse> Handle(ReserveSeatCommand command);
+        public Task<ReserveSeatsResponse> Handle(ReserveSeatsCommand command, string userId);
     }
 }

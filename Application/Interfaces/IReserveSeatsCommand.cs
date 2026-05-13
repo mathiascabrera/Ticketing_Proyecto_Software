@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.UseCases.Events.Queries
+namespace Application.Interfaces
 {
-    public class GetEventsQuery
+    public interface IReserveSeatsCommand
     {
     }
 }

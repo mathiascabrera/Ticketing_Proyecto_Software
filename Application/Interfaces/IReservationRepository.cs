@@ -12,6 +12,6 @@ namespace Application.Interfaces
         public Task UpdateAsync(Reservation reservation);
         public Task<Reservation?> GetByIdAsync(Guid id);
         public Task AddAsync(Reservation reservation);
-        public Task<bool> HasActiveReservation(Guid seatId);
+        public Task<Reservation> GetByIdWithSeats(Guid id);
     }
 }

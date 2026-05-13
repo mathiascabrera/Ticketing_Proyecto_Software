@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
 
-namespace Application.UseCases.Reservations.Commands
+namespace Application.UsesCases.Reservations.Commands
 {
     public class ConfirmSeatCommand : IConfirmSeatCommand
     {
         public Guid ReservationId { get; set; }
-        public int UserId { get; set; } //  para auditoría
     }
 }

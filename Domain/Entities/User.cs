@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string PasswordHash { get; set; }
-        public virtual ICollection<Reservation> ReservationList { get; set; }
-        public virtual ICollection<AuditLog> AuditLogList { get; set; }
+
+        public ICollection<Reservation> ReservationList { get; set; } = new HashSet<Reservation>();
+        public ICollection<AuditLog> AuditLogList { get; set; } = new HashSet<AuditLog>();
     }
 }

@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Events\Commands\" />
-    <Folder Include="UseCases\Reservations\Queries\" />
-    <Folder Include="UseCases\Seats\Commands\" />
+    <Folder Include="UsesCases\Events\Commands\" />
+    <Folder Include="UsesCases\Reservations\Queries\" />
+    <Folder Include="UsesCases\Seats\Commands\" />
   </ItemGroup>
 
 </Project>

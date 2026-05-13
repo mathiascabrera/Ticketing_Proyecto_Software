@@ -13,16 +13,16 @@ using System.Reflection.Emit;
 using System.Threading.Tasks;
 using System.Reflection.Metadata;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Event> Events { get; set; }
         public DbSet<Sector> Sectors { get; set; }
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -35,6 +35,8 @@ namespace Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); 
+
             modelBuilder.Entity<Event>(entity =>
             {
                 entity.ToTable("EVENT");
@@ -58,16 +60,6 @@ namespace Infrastructure.Persistence
                 .WithOne(s => s.EventObj)
                 .HasForeignKey(e => e.EventId)
                 .IsRequired();
-
-                entity.HasData
-                (new Event
-                {
-                    Id = 1,
-                    Name = "Movie",
-                    EventDate = new DateTime(2026, 07, 28),
-                    Venue = "The Hobbit",
-                    Status = "Available"
-                });
             });
 
             modelBuilder.Entity<Sector>(entity =>
@@ -104,24 +96,6 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(e => e.SectorId)
                 .IsRequired(false);
 
-                entity.HasData
-                (new Sector
-                {
-                    Id = 1,
-                    EventId = 1,
-                    Name = "VIP",
-                    Price = 800,
-                    Capacity = 100
-                },
-                new Sector
-                {
-                    Id = 2,
-                    EventId = 1,
-                    Name = "NORMAL",
-                    Price = 450,
-                    Capacity = 1000
-                });
-
             });
             modelBuilder.Entity<Seat>(entity =>
             {
@@ -130,7 +104,6 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Id)
-                    .HasColumnType("uniqueidentifier")
                     .ValueGeneratedOnAdd();
 
                 entity.HasOne(e => e.SectorObj)
@@ -147,43 +120,17 @@ namespace Infrastructure.Persistence
                     .IsRequired();
 
                 entity.Property(e => e.Status)
-                    .HasConversion<string>()
-                    .HasMaxLength(20)
+                    .HasConversion<int>()
+                    .HasColumnType("int")
                     .IsRequired();
 
-           //     entity.Property(e => e.RowVersion)    para concurrencia mas adelante 
-           //        .IsRowVersion();
+          
+                entity.Property(e => e.RowVersion)
+                    .IsRowVersion();
 
-                entity.Property(s => s.Version)
-                .HasColumnType("int")
-                .IsRequired();
-
-                entity.HasOne(e => e.ReservationObj)
-                    .WithOne(r => r.SeatObj)
-                    .HasForeignKey<Reservation>()
-                    .IsRequired(false);
-
-                for (int sector = 1; sector < 3; sector++)
-                {
-                    for (int seat = 1; seat < 6; seat++)
-                    {
-                        for (char row = 'A'; row <= 'E'; row++)
-                        {
-                            entity.HasData
-                            (
-                                new Seat
-                                {
-                                    Id = Guid.Parse(Guid.NewGuid().ToString()),
-                                    SectorId = sector,
-                                    RowIdentifier = row.ToString(),
-                                    SeatNumber = seat,
-                                    Status = 0,
-                                    Version = 0
-                                }
-                            );
-                        }
-                    }
-                }
+                entity.HasMany(e => e.ReservationSeats)
+                    .WithOne(rs => rs.SeatObj)
+                    .HasForeignKey(rs => rs.SeatId);
             });
 
             modelBuilder.Entity<Reservation>(entity =>
@@ -193,13 +140,13 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Id)
-                .HasColumnType("uniqueidentifier")
-                .ValueGeneratedOnAdd();
+                    .HasColumnType("uniqueidentifier")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Status)
-                  .HasConversion<string>()
-                  .HasMaxLength(20)
-                  .IsRequired();
+                    .HasConversion<string>()
+                    .HasMaxLength(20)
+                    .IsRequired();
 
                 entity.Property(e => e.ReservedAt)
                     .IsRequired();
@@ -207,43 +154,44 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.ExpiresAt)
                     .IsRequired();
 
+                // relación con User
                 entity.HasOne(e => e.UserObj)
-                .WithMany(u => u.ReservationList)
-                .HasForeignKey(e => e.UserId)
-                .IsRequired();
+                    .WithMany(u => u.ReservationList)
+                    .HasForeignKey(e => e.UserId)
+                    .IsRequired();
+
+                // relación con ReservationSeat
+                entity.HasMany(e => e.Seats)
+                    .WithOne(rs => rs.ReservationObj)
+                    .HasForeignKey(rs => rs.ReservationId);
+
             });
 
-            modelBuilder.Entity<User>(entity =>
+            modelBuilder.Entity<ReservationSeat>(entity =>
             {
-                entity.ToTable("USER");
+                entity.ToTable("RESERVATION_SEAT");
 
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Id)
-                .HasColumnType("int")
-                .ValueGeneratedOnAdd();
+                    .HasColumnType("uniqueidentifier")
+                    .ValueGeneratedOnAdd();
 
-                entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(12);
+                // relación con Reservation
+                entity.HasOne(e => e.ReservationObj)
+                    .WithMany(r => r.Seats)
+                    .HasForeignKey(e => e.ReservationId);
 
-                entity.Property(e => e.Email)
-                .IsRequired()
-                .HasMaxLength(254);
+                // relación con Seat
+                entity.HasOne(e => e.SeatObj)
+                    .WithMany(s => s.ReservationSeats)
+                    .HasForeignKey(e => e.SeatId);
 
-                entity.Property(e => e.PasswordHash)
-                .IsRequired();
-
-                entity.HasMany(e => e.ReservationList)
-                .WithOne(r => r.UserObj)
-                .HasForeignKey(e => e.UserId)
-                .IsRequired(false);
-
-                entity.HasMany(e => e.AuditLogList)
-                .WithOne(a => a.UserObj)
-                .HasForeignKey(e => e.UserId)
-                .IsRequired(false);
+                // evitar duplicados
+                entity.HasIndex(e => new { e.ReservationId, e.SeatId })
+                    .IsUnique();
             });
+
 
             modelBuilder.Entity<AuditLog>(entity =>
             {

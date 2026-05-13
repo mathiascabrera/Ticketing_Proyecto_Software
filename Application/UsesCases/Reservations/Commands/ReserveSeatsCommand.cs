@@ -7,9 +7,8 @@ using Application.Interfaces;
 
 namespace Application.UsesCases.Reservations.Commands
 {
-    public class ReserveSeatCommand :  IReserveSeatCommand
+    public class ReserveSeatsCommand :  IReserveSeatsCommand
     {
-        public Guid SeatId { get; set; }
-        public int UserId { get; set; } 
+        public List<Guid> SeatsIds { get; set; }
     }
 }

@@ -20,16 +20,16 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Seat?> GetByIdAsync(Guid id)
+        public async Task<Seat?> GetByIdAsync(Guid id)  // traer un asiento con ID
         {
             return await _context.Seats.FindAsync(id);
         }
 
-        public async Task<List<Seat>> GetAllAsync()
+        public async Task<List<Seat>> GetAllAsync() // traer todos los asientos 
         {
             return await _context.Seats.ToListAsync();
         }
-        public async Task UpdateAsync(Seat seat)
+        public async Task UpdateAsync(Seat seat) // actualizar 1 asiento  
         {
             try
             {
@@ -41,12 +41,23 @@ namespace Infrastructure.Repositories
                 throw new ConcurrencyException();
             }
         }
-        public async Task<List<Seat>> GetSeatsByEventIdAsync(int eventId)
+        public async Task<List<Seat>> GetSeatsByEventIdAsync(int eventId) // traer todos los asientos de un evento
         {
             return await _context.Seats
                 .Include(s => s.SectorObj)
                 .Where(s => s.SectorObj.EventId == eventId)
                 .ToListAsync();
         }
+
+        public async Task<List<Seat>> GetByIdsAsync(List<Guid> seatsIds) // traer solo los asientos de la lista de guids
+        {
+            return await _context.Seats
+                .Where(s => seatsIds.Contains(s.Id))
+                .ToListAsync();
+        }
+
+
+
+
     }
 }

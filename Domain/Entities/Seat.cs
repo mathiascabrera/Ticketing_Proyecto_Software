@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,10 @@ namespace Domain.Entities
         public string RowIdentifier { get; set; }
         public int SeatNumber { get; set; }
         public SeatStatus Status { get; set; }
-        public int Version { get; set; }
-      //  public byte[] RowVersion { get; set; }  // ✔ control de concurrencia
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }  
         public Sector SectorObj { get; set; }
-        public Reservation? ReservationObj { get; set; }
+        public ICollection<ReservationSeat> ReservationSeats { get; set; } = new List<ReservationSeat>();
     }
 }

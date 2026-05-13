@@ -37,13 +37,15 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> HasActiveReservation(Guid seatId)
+
+        public async Task<Reservation> GetByIdWithSeats(Guid id)
         {
-            return await _context.Reservations.AnyAsync(r =>
-                r.SeatId == seatId &&
-                r.Status == ReservationStatus.Pending &&
-                r.ExpiresAt > DateTime.UtcNow
-            );
+            return await _context.Reservations
+            .Include(r => r.Seats)
+            .ThenInclude(rs => rs.SeatObj)
+            .FirstOrDefaultAsync(r => r.Id == id);
         }
+
+            
     }
 }

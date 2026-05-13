@@ -8,7 +8,13 @@ namespace Domain.Exeptions
 {
     public class ConcurrencyException : Exception
     {
+        public ConcurrencyException(string message) : base(message) { }
+
+        public ConcurrencyException(string message, Exception inner)
+            : base(message, inner) { }
+
         public ConcurrencyException()
-            : base("The record was modified by another user") { }
+            : base("Error de concurrencia") { }
+
     }
 }

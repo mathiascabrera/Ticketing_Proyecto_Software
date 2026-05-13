@@ -15,12 +15,11 @@ namespace Domain.Entities
     public class Reservation
     {
         public Guid Id { get; set; }
-        public int UserId { get; set; }
-        public Guid SeatId { get; set; }
+        public string UserId { get; set; }
         public ReservationStatus Status { get; set; }
         public DateTime ReservedAt { get; set; }
         public DateTime ExpiresAt { get; set; }
         public User UserObj { get; set; }
-        public Seat SeatObj { get; set; }
+        public ICollection<ReservationSeat> Seats { get; set; } = new List<ReservationSeat>();
     }
 }

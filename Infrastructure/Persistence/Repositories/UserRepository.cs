@@ -18,7 +18,7 @@ namespace Infrastructure.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<User?> GetByIdAsync(int id)
+        public async Task<User?> GetByIdAsync(string id)
         {
             return await _context.Users
                 .FirstOrDefaultAsync(u => u.Id == id);
