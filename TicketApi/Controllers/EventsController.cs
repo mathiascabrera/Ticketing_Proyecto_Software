@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces;
 using Infrastructure.Persistence.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Application.DTOs;
 using Application.UsesCases.Events.Commands;
 
@@ -10,6 +11,7 @@ using Application.UsesCases.Events.Commands;
 namespace TicketApi.Controllers
 {
     [Route("api/v1/")]
+    [Authorize]
     [ApiController]
     public class EventsController : ControllerBase
     {
@@ -48,7 +50,7 @@ namespace TicketApi.Controllers
         }
 
         // -------------------------
-        // CREATE EVENT         (NO IMPLEMENTADO)
+        // CREATE EVENT         (NO IMPLEMENTADO) en eso.......
         // -------------------------
         [HttpPost]
         [HttpPost]

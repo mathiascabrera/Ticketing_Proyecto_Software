@@ -3,11 +3,12 @@ using Domain.Entities;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TicketApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/")]
     public class AuthController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
@@ -61,7 +62,7 @@ namespace TicketApi.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var user = await _userManager.FindByNameAsync(dto.UserName);
+            var user = await _userManager.FindByEmailAsync(dto.Email);
 
             if (user == null)
                 return Unauthorized("Usuario no existe");
