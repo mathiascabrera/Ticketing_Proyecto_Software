@@ -11,7 +11,7 @@ using Application.UsesCases.Events.Commands;
 namespace TicketApi.Controllers
 {
     [Route("api/v1/")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class EventsController : ControllerBase
     {
@@ -52,7 +52,6 @@ namespace TicketApi.Controllers
         // -------------------------
         // CREATE EVENT         (NO IMPLEMENTADO) en eso.......
         // -------------------------
-        [HttpPost]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateEventDto dto)
         {

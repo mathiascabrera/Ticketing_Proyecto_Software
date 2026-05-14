@@ -30,7 +30,7 @@ namespace Api4.Controllers
         // CREATE RESERVATION                       // CONSULTAR SI... TOMAMOS EL TOKEN ACA PARA EL ID DEL USUARIO O LE PASAMOS EL TOKEN AL HANDLER 
         // -------------------------                // Y QUE SAQUE EL ID DEL USUARIO DENTRO DEL HANDLER ... AL IGUAL QUE EL LOGIN Y EL REGISTER
         [HttpPost]
-        [Authorize(Roles = "User,Admin")]
+        //[Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> CreateReservation([FromBody] ReserveSeatsCommand command)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -54,7 +54,7 @@ namespace Api4.Controllers
         // CONFIRM RESERVATION   
         // -------------------------
         [HttpPost("confirm")]
-        [Authorize(Roles = "User,Admin")]
+        //[Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> ConfirmReservation([FromBody] ConfirmSeatCommand command)
         {
             try
