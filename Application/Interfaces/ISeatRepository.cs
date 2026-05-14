@@ -14,5 +14,6 @@ namespace Application.Interfaces
         Task<List<Seat>> GetSeatsByEventIdAsync(int eventId);
         Task UpdateAsync(Seat seat);
         Task<List<Seat>> GetByIdsAsync(List<Guid> seatsIds);
+        Task AddRangeAsync(IEnumerable<Seat> seats);
     }
 }

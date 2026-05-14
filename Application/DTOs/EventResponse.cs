@@ -11,6 +11,9 @@ namespace Application.DTOs
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public DateTime EventDate { get; set; }
-        public List<SectorResponse> Sectors { get; set; } = new();
+        public string? Url1 { get; set; }
+        public string? Url2 { get; set; }
+        public string? Description { get; set; }
+
     }
 }

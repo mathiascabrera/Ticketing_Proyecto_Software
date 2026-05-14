@@ -46,7 +46,6 @@ namespace Infrastructure.Persistence.Repositories
         public async Task UpdateAsync(Event ev)
         {
             _context.Events.Update(ev);
-            await _context.SaveChangesAsync();
         }
 
         // DELETE
@@ -60,5 +59,11 @@ namespace Infrastructure.Persistence.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+
     }
 }

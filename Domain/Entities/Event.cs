@@ -13,6 +13,9 @@ namespace Domain.Entities
         public DateTime EventDate { get; set; }
         public string Venue { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public string? Url1 { get; set; }
+        public string? Url2 { get; set; }
         public ICollection<Sector> SectorsList { get; set; } = new List<Sector>();
     }
 }

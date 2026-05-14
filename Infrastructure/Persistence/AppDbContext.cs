@@ -35,7 +35,7 @@ namespace Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder); 
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Event>(entity =>
             {
@@ -44,22 +44,35 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Id)
-                         .HasColumnType("int")
-                         .ValueGeneratedOnAdd();
+                    .HasColumnType("int")
+                    .ValueGeneratedOnAdd();
 
-                entity.Property(c => c.EventDate)
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.EventDate)
                     .IsRequired();
 
                 entity.Property(e => e.Venue)
-                    .IsRequired();
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.Status)
                     .IsRequired();
 
-                entity.HasMany(e => e.SectorsList)
-                .WithOne(s => s.EventObj)
-                .HasForeignKey(e => e.EventId)
-                .IsRequired();
+                entity.Property(e => e.Description)
+                    .HasMaxLength(500);
+
+                entity.Property(e => e.Url1)
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Url2)
+                    .HasMaxLength(255);
+
+                // ❌ IMPORTANTE:
+                // NO volver a definir la relación acá
+                // EF ya la maneja desde Sector
             });
 
             modelBuilder.Entity<Sector>(entity =>
@@ -69,33 +82,54 @@ namespace Infrastructure.Persistence
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Id)
-                .HasColumnType("int")
-                .ValueGeneratedOnAdd();
-
-                entity.HasOne(e => e.EventObj)
-                .WithMany(e => e.SectorsList)
-                .HasForeignKey(e => e.EventId)
-                .IsRequired();
+                    .HasColumnType("int")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(30);
+                    .IsRequired()
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.Price)
-                .HasColumnType("decimal(18,2)")
-                .HasPrecision(18, 2)
-                .IsRequired()
-                .HasDefaultValue(0.00m);
+                    .HasColumnType("decimal(18,2)")
+                    .IsRequired()
+                    .HasDefaultValue(0.00m);
 
                 entity.Property(e => e.Capacity)
                     .HasColumnType("int")
                     .IsRequired();
 
-                entity.HasMany(e => e.SeatsList)
-                .WithOne(s => s.SectorObj)
-                .HasForeignKey(e => e.SectorId)
-                .IsRequired(false);
+                //  layout del sector (lo que mandaba el front)
+                entity.Property(e => e.Rows)
+                    .HasColumnType("int")
+                    .IsRequired();
 
+                entity.Property(e => e.Cols)
+                    .HasColumnType("int")
+                    .IsRequired();
+
+                entity.Property(e => e.GridX)
+                    .HasColumnType("int")
+                    .IsRequired();
+
+                entity.Property(e => e.GridY)
+                    .HasColumnType("int")
+                    .IsRequired();
+
+                entity.HasOne(e => e.EventObj)
+                    .WithMany(e => e.SectorsList)
+                    .HasForeignKey(e => e.EventId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(e => e.SeatsList)
+                    .WithOne(s => s.SectorObj)
+                    .HasForeignKey(s => s.SectorId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                //  regla importante: nombre único por evento
+                entity.HasIndex(e => new { e.EventId, e.Name })
+                    .IsUnique();
             });
             modelBuilder.Entity<Seat>(entity =>
             {

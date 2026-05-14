@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260513164724_AddEventImageUrls")]
+    partial class AddEventImageUrls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,34 +68,26 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url1")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url2")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Venue")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -193,16 +188,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<int>("Cols")
-                        .HasColumnType("int");
-
                     b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GridX")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GridY")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -212,16 +198,13 @@ namespace Infrastructure.Migrations
 
                     b.Property<decimal>("Price")
                         .ValueGeneratedOnAdd()
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0.00m);
 
-                    b.Property<int>("Rows")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId", "Name")
-                        .IsUnique();
+                    b.HasIndex("EventId");
 
                     b.ToTable("SECTOR", (string)null);
                 });

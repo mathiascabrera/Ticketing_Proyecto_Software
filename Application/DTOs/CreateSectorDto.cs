@@ -4,20 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.DTOs
 {
-    public class Sector
+    public class CreateSectorDto
     {
-        public int Id { get; set; }
-        public int EventId { get; set; }
+        public long Id { get; set; } // id del front (timestamp)
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int Capacity { get; set; }
         public int Rows { get; set; }
         public int Cols { get; set; }
+        public decimal Price { get; set; }
         public int GridX { get; set; }
         public int GridY { get; set; }
-        public Event EventObj { get; set; }
-        public virtual ICollection<Seat> SeatsList { get; set; }
     }
 }

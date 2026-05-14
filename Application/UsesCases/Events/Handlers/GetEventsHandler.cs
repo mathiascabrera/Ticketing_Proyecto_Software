@@ -28,12 +28,7 @@ namespace Application.UsesCases.Events.Handlers
                 Id = e.Id,
                 Name = e.Name,
                 EventDate = e.EventDate,
-                Sectors = e.SectorsList?.Select(s => new SectorResponse
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Price = s.Price
-                }).ToList() ?? new List<SectorResponse>()
+                Description = e.Description
             }).ToList();
         }
     }

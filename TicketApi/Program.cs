@@ -143,20 +143,26 @@ builder.Services.AddSwaggerGen(c =>
 // DEPENDENCY INJECTION
 // =========================
 builder.Services.AddScoped<ISeatRepository, SeatRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<ISectorRepository, SectorRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<IGetSeatByIdHandler, GetSeatByIdHandler>();
 builder.Services.AddScoped<IGetAllSeatsHandler, GetAllSeatsHandler>();
 
-builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IReserveSeatsCommand, ReserveSeatsCommand>();
 builder.Services.AddScoped<IConfirmSeatCommand, ConfirmSeatCommand>();
 builder.Services.AddScoped<IConfirmSeatHandler, ConfirmSeatHandler>();
 builder.Services.AddScoped<IReserveSeatsHandler, ReserveSeatsHandler>();
 
-builder.Services.AddScoped<IEventRepository, EventRepository>();
+
 builder.Services.AddScoped<IGetEventSeatsHandler, GetEventSeatsHandler>();
 builder.Services.AddScoped<IGetEventsHandler, GetEventsHandler>();
+builder.Services.AddScoped<ICreateEventHandler, CreateEventHandler>();
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
 builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -190,7 +196,7 @@ app.MapControllers();
 
 
 // =========================
-// SEED DATA (CORRECTO)
+// SEED DATA 
 // =========================
 using (var scope = app.Services.CreateScope())
 {

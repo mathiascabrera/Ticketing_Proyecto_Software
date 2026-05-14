@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces;
 using Infrastructure.Persistence.Repositories;
+using Application.DTOs;
+using Application.UsesCases.Events.Commands;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,13 +16,16 @@ namespace TicketApi.Controllers
 
         private readonly IGetEventSeatsHandler _handler;
         private readonly IGetEventsHandler _eventshandler;
+        private readonly ICreateEventHandler _createEventHandler;
 
         public EventsController(
             IGetEventSeatsHandler handler,
-            IGetEventsHandler eventshandler)
+            IGetEventsHandler eventshandler,
+            ICreateEventHandler createEventHandler ) 
         {
             _handler = handler;
             _eventshandler = eventshandler;
+            _createEventHandler = createEventHandler;
         }
 
         // -------------------------
@@ -46,8 +51,14 @@ namespace TicketApi.Controllers
         // CREATE EVENT         (NO IMPLEMENTADO)
         // -------------------------
         [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateEventDto dto)
         {
+            var command = new CreateEventCommand(dto);
+
+            var id = await _createEventHandler.Handle(command);
+
+            return StatusCode(201, new { id });
         }
 
         // -------------------------

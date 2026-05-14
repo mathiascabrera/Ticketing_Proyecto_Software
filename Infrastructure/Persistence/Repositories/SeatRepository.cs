@@ -56,6 +56,11 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task AddRangeAsync(IEnumerable<Seat> seats)
+        {
+            await _context.Seats.AddRangeAsync(seats);
+        }
+
 
 
 
