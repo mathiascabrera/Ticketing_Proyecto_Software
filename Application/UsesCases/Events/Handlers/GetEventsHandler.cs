@@ -28,7 +28,9 @@ namespace Application.UsesCases.Events.Handlers
                 Id = e.Id,
                 Name = e.Name,
                 EventDate = e.EventDate,
-                Description = e.Description
+                Description = e.Description,
+                Url1 = e.Url1,
+                Url2 = e.Url2,
             }).ToList();
         }
     }
