@@ -70,9 +70,18 @@ namespace Infrastructure.Persistence
                 entity.Property(e => e.Url2)
                     .HasMaxLength(255);
 
-                // ❌ IMPORTANTE:
-                // NO volver a definir la relación acá
-                // EF ya la maneja desde Sector
+                entity.HasData
+                (new Event
+                {
+                    Id = 1,
+                    Name = "Movie",
+                    EventDate = new DateTime(2026, 07, 28),
+                    Venue = "The Hobbit",
+                    Status = "Available",
+                    Description = "Action",
+                    Url1 = "https://www.elcineenlasombra.com/wp-content/uploads/2014/12/the-hobbit-the-desolation-of-smaug-22982-2880x1800-copia.jpg",
+                    Url2 = "https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/6ba42b80-1619-4ed4-b250-0f0718fd3141/f6b2b5af2d4217fca21c52e6b286f67bd78c2d79.jpg?host=wbd-images.prod-vod.h264.io&partner=beamcom&w=500"
+                });
             });
 
             modelBuilder.Entity<Sector>(entity =>
@@ -130,6 +139,28 @@ namespace Infrastructure.Persistence
                 //  regla importante: nombre único por evento
                 entity.HasIndex(e => new { e.EventId, e.Name })
                     .IsUnique();
+
+                entity.HasData
+                (new Sector
+                {
+                    Id = 1,
+                    EventId = 1,
+                    Name = "VIP",
+                    Price = 800,
+                    Capacity = 100,
+                    Rows = 5,
+                    Cols = 5
+                },
+                new Sector
+                {
+                    Id = 2,
+                    EventId = 1,
+                    Name = "NORMAL",
+                    Price = 450,
+                    Capacity = 1000,
+                    Rows = 5,
+                    Cols = 5
+                });
             });
             modelBuilder.Entity<Seat>(entity =>
             {
@@ -165,6 +196,28 @@ namespace Infrastructure.Persistence
                 entity.HasMany(e => e.ReservationSeats)
                     .WithOne(rs => rs.SeatObj)
                     .HasForeignKey(rs => rs.SeatId);
+
+                for (int sector = 1; sector < 3; sector++)
+                {
+                    for (int seat = 1; seat < 6; seat++)
+                    {
+                        for (char row = 'A'; row <= 'E'; row++)
+                        {
+                            entity.HasData
+                            (
+                                new Seat
+                                {
+                                    Id = Guid.Parse(Guid.NewGuid().ToString()),
+                                    SectorId = sector,
+                                    RowIdentifier = row.ToString(),
+                                    SeatNumber = seat,
+                                    Status = 0,
+                                    RowVersion = []
+                                }
+                            );
+                        }
+                    }
+                }
             });
 
             modelBuilder.Entity<Reservation>(entity =>
