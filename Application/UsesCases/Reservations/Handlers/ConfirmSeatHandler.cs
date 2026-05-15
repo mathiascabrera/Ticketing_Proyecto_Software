@@ -34,18 +34,18 @@ namespace Application.UsesCases.Reservations.Handlers
             
             try
             {
-                // 🔍 1. Buscar reserva con asientos
+                //  Buscar reserva con asientos
                 var reservation = await _reservationRepository.GetByIdWithSeats(command.ReservationId);
                 userid = reservation.UserId;
 
                 if (reservation == null)
                     throw new BusinessException("Reservation not found");
 
-                // 🔒 2. Validar estado
+                //  Validar estado
                 if (reservation.Status != ReservationStatus.Pending)
                     throw new BusinessException("Invalid reservation state");
 
-                // ⏳ 3. Validar expiración
+                //  Validar expiración
                 if (reservation.ExpiresAt < DateTime.UtcNow)
                 {
                     reservation.Status = ReservationStatus.Expired;
@@ -54,7 +54,7 @@ namespace Application.UsesCases.Reservations.Handlers
                     throw new BusinessException("Reservation expired");
                 }
 
-                // 🔗 4. Obtener TODOS los asientos
+                //  Obtener TODOS los asientos
                 var seats = reservation.Seats
                     .Select(rs => rs.SeatObj)
                     .ToList();
@@ -62,20 +62,20 @@ namespace Application.UsesCases.Reservations.Handlers
                 if (seats.Count == 0)
                     throw new BusinessException("No seats in reservation");
 
-                // 🔥 5. Actualizar TODOS los asientos
+                //  Actualizar TODOS los asientos
                 foreach (var seat in seats)
                 {
                     seat.Status = SeatStatus.Sold;
                 }
 
-                // 💰 6. Confirmar reserva
+                //  Confirmar reserva
                 reservation.Status = ReservationStatus.Paid;
 
-                // 💾 7. Guardar todo
+                //  Guardar todo
                 await _reservationRepository.UpdateAsync(reservation);
                // await _seatRepository.UpdateRangeAsync(seats);
 
-                // 📝 8. Auditoría éxito
+                //  Auditoría éxito
                 await _auditLogRepository.AddAsync(new AuditLog
                 {
                     Id = Guid.NewGuid(),
@@ -97,7 +97,7 @@ namespace Application.UsesCases.Reservations.Handlers
             }
             catch (Exception ex)
             {
-                // 📝 Auditoría fallo
+                //  Auditoría fallo
                 await _auditLogRepository.AddAsync(new AuditLog
                 {
                     Id = Guid.NewGuid(),

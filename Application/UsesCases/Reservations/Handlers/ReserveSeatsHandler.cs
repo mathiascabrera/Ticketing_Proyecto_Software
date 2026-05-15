@@ -41,11 +41,11 @@ namespace Application.UsesCases.Reservations.Handlers
                 var seats = await _seatRepository.GetByIdsAsync(command.SeatsIds);
 
                 if (seats.Count != command.SeatsIds.Count)
-                    throw new Exception("Algunos asientos no existen");
+                    throw new BusinessException("Algunos asientos no existen");
 
                 // 2. Validar disponibilidad REAL
                 if (seats.Any(s => s.Status != SeatStatus.Available))
-                    throw new Exception("Uno o más asientos ya están reservados");
+                    throw new BusinessException("Uno o más asientos ya están reservados");
 
                 // 3. Crear reserva
                 var reservation = new Reservation

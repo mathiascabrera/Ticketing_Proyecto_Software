@@ -12,7 +12,7 @@ namespace Application.Interfaces
     public interface IGetEventSeatsHandler
     {
 
-        public Task<List<SeatResponse>> Handle(GetEventSeatsQuery query);
+        Task<List<SectorSeatsResponse>> Handle(GetEventSeatsQuery query);
 
     }
 }
