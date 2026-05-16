@@ -18,13 +18,10 @@ export function renderEvents(events, containerId) {
         console.error(`Container with id "${containerId}" not found`);
         return;
     }
-
     container.innerHTML = "";
     events.forEach(event => {
         container.innerHTML += createEventCard(event);
     });
-
-    // Agregar event listeners después de renderizar
     addEventListeners();
 }
 

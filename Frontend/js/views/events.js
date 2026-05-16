@@ -13,10 +13,8 @@ async function loadEvents() {
     }
 }
 
-// Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', loadEvents);
 
-// Carga inmediata si el DOM ya está listo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadEvents);
 } else {

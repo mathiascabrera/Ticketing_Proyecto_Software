@@ -1,235 +1,139 @@
-console.log("🚀 APP INICIADA");
+import { reservationService } from '../Services/reservationService.js';
+import { SeatMap } from '../Components/seatMap.js';
+import { Toast } from '../Components/toast.js';
 
-// ------------------ ELEMENTOS ------------------
-const container = document.getElementById("seats-container");
-const reserveBtn = document.getElementById("reserveBtn");
-const payBtn = document.getElementById("payBtn");
+class ScenarioView {
+    constructor() {
+        this.eventId = this.getEventId();
+        this.seatMap = null;
+        this.toast = new Toast("toast");
+        this.reservationId = null;
+        this.reservedMode = false;
 
-const eventId = 1;
-
-// ------------------ ESTADO ------------------
-let seats = [];
-let selectedSeat = null;
-let currentReservationId = null;
-let lockSelection = false; // 🔥 BLOQUEO GLOBAL
-
-// ------------------ INIT ------------------
-init();
-
-async function init() {
-  payBtn.disabled = true;
-  await loadSeats();
-}
-
-// ------------------ LOAD SEATS ------------------
-async function loadSeats() {
-  try {
-    const res = await fetch(`https://localhost:7269/api/v1/${eventId}/seats`);
-
-    
-    const data = await res.json();
-    console.log(data)
-
-    data.sort((a, b) => {
-      if (a.rowIdentifier === b.rowIdentifier) {
-        return a.seatNumber - b.seatNumber;
-      }
-      return a.rowIdentifier.localeCompare(b.rowIdentifier);
-    });
-
-    seats = data;
-    renderSeats();
-
-  } catch (err) {
-    console.error("❌ Error cargando:", err);
-  }
-}
-
-// ------------------ STATUS ------------------
-function getStatusClass(status) {
-  switch (status) {
-    case 0: return "available";
-    case 1: return "reserved";
-    case 2: return "sold";
-    default: return "available";
-  }
-}
-
-// ------------------ RENDER ------------------
-function renderSeats() {
-  container.innerHTML = "";
-
-  renderSector("VIP", seats.filter(s => s.sector === 1));
-  renderSector("GENERAL", seats.filter(s => s.sector === 2));
-}
-
-// ------------------ SECTOR ------------------
-function renderSector(titleText, data) {
-
-  const title = document.createElement("h3");
-  title.innerText = "🎟 " + titleText;
-  container.appendChild(title);
-
-  let currentRow = null;
-  let rowDiv = null;
-
-  data.forEach(s => {
-
-    if (s.rowIdentifier !== currentRow) {
-      currentRow = s.rowIdentifier;
-
-      rowDiv = document.createElement("div");
-      rowDiv.className = "seat-row";
-
-      container.appendChild(rowDiv);
+        this.init();
     }
 
-    const seat = document.createElement("div");
-    seat.className = "seat " + getStatusClass(s.status);
-    seat.innerText = `${s.rowIdentifier}${s.seatNumber}`;
-
-    // 🔥 BLOQUEO TOTAL SI YA HAY RESERVA ACTIVA
-    seat.addEventListener("click", () => {
-
-      if (lockSelection) {
-        showToast("⚠️ Ya tenés una reserva activa realiza la compra primero", "warning");
-        return;
-      }
-
-      if (s.status === 1 || s.status === 2) {
-        showToast("❌ Asiento no disponible", "error");
-        return;
-      }
-
-      if (selectedSeat) {
-        selectedSeat.element.classList.remove("selected");
-      }
-
-      selectedSeat = {
-        id: s.id,
-        element: seat
-      };
-
-      seat.classList.add("selected");
-    });
-
-    rowDiv.appendChild(seat);
-  });
-}
-
-// ------------------ RESERVAR ------------------
-async function reservar() {
-
-  if (!selectedSeat) {
-    showToast("⚠️ Seleccione un asiento", "error");
-    return;
-  }
-
-  try {
-    showToast("⏳ Procesando reserva...", "info");
-
-    const res = await fetch(
-      `https://localhost:7269/api/Reservations?seatId=${selectedSeat.id}`,
-      { method: "POST" }
-    );
-
-    if (!res.ok) throw new Error();
-
-    const data = await res.json();
-
-    currentReservationId = data.reservationId;
-
-    // 🔥 BLOQUEO DESPUÉS DE RESERVAR
-    lockSelection = true;
-
-    payBtn.disabled = false;
-
-    showToast("✅ Reserva creada", "success");
-
-    selectedSeat = null;
-    loadSeats();
-
-  } catch (error) {
-    console.error(error);
-    showToast("❌ Error en la reserva", "error");
-  }
-}
-
-// ------------------ PAGAR ------------------
-payBtn.addEventListener("click", async () => {
-
-  if (!currentReservationId) return;
-
-  try {
-    showToast("💳 Confirmando pago...", "info");
-
-    const res = await fetch(
-      "https://localhost:7269/api/Reservations/confirm",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          reservationId: currentReservationId,
-          userId: 1
-        })
-      }
-    );
-
-    const data = await res.json();
-
-    if (!res.ok || data.status !== "Paid") {
-      showToast("❌ Pago no confirmado", "error");
-      return;
+    getEventId() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('eventId');
     }
 
-    showToast("💳 Compra exitosa", "success");
+    async init() {
+        await this.loadSeats();
+        this.setupEventListeners();
+    }
 
-    // 🔥 RESET COMPLETO
-    currentReservationId = null;
-    lockSelection = false;
-    payBtn.disabled = true;
+    async loadSeats() {
+        try {
+            const sectors = await reservationService.getSeats(this.eventId);
+            console.log('Seats loaded:', sectors);
+            
+            this.seatMap = new SeatMap("map", (seat) => this.handleSeatClick(seat));
+            this.seatMap.render(sectors);
+        } catch (error) {
+            this.toast.show("Error loading seats");
+            console.error(error);
+        }
+    }
 
-    loadSeats();
+    setupEventListeners() {
+        document.getElementById("btnReserve").addEventListener("click", () => this.reserve());
+        document.getElementById("btnConfirm").addEventListener("click", () => this.confirm());
+        document.getElementById("btnCancel").addEventListener("click", () => this.cancel());
+    }
 
-  } catch (error) {
-    console.error(error);
-    showToast("❌ Error en el pago", "error");
-  }
+    async handleSeatClick(seat) {
+        if (this.reservedMode) {
+            this.toast.show("First, cancel or pay for your reservation");
+            return;
+        }
+
+        if (seat.status === 1) {
+            this.toast.show("This seat is already reserved");
+            return;
+        }
+
+        if (seat.status === 2) {
+            this.toast.show("This seat has already been purchased");
+            return;
+        }
+
+        this.seatMap.selectSeat(seat.id);
+    }
+
+    async reserve() {
+        const selectedSeats = this.seatMap.getSelectedSeats();
+        if (selectedSeats.length === 0) {
+            this.toast.show("Select seats");
+            return;
+        }
+
+        try {
+            const data = await reservationService.createReservation(selectedSeats);
+            this.reservationId = data.reservationId;
+            this.reservedMode = true;
+            
+            this.updateUIState();
+            this.toast.show("Reserve created");
+            await this.loadSeats();
+        } catch (error) {
+            if (error.message === "CONFLICT") {
+                this.toast.show("⚠️ Another user booked earlier. Updating...");
+                this.seatMap.clearSelection();
+                await this.loadSeats();
+            } else {
+                this.toast.show("Error when booking");
+            }
+        }
+    }
+
+    async confirm() {
+        try {
+            await reservationService.confirmReservation(this.reservationId);
+            this.toast.show("Confirmed purchase");
+            
+            this.resetState();
+            await this.loadSeats();
+        } catch (error) {
+            this.toast.show("Error confirming purchase");
+        }
+    }
+
+    cancel() {
+        this.resetState();
+        this.loadSeats();
+    }
+
+    updateUIState() {
+        const reserveBtn = document.getElementById("btnReserve");
+        const confirmBtn = document.getElementById("btnConfirm");
+        const cancelBtn = document.getElementById("btnCancel");
+
+        reserveBtn.disabled = true;
+        reserveBtn.style.opacity = "0.4";
+        confirmBtn.disabled = false;
+        cancelBtn.style.display = "inline-block";
+
+        this.seatMap.toggleReservedMode(true);
+    }
+
+    resetState() {
+        this.reservationId = null;
+        this.reservedMode = false;
+        this.seatMap.clearSelection();
+
+        const reserveBtn = document.getElementById("btnReserve");
+        const confirmBtn = document.getElementById("btnConfirm");
+        const cancelBtn = document.getElementById("btnCancel");
+
+        reserveBtn.disabled = false;
+        reserveBtn.style.opacity = "1";
+        confirmBtn.disabled = true;
+        cancelBtn.style.display = "none";
+
+        this.seatMap.toggleReservedMode(false);
+    }
+}
+document.addEventListener('DOMContentLoaded', () => {
+    new ScenarioView();
 });
-
-// ------------------ EVENTOS ------------------
-reserveBtn.addEventListener("click", reservar);
-
-// ------------------ TOAST ------------------
-function showToast(message, type = "info") {
-
-  let toast = document.getElementById("toast");
-
-  if (!toast) {
-    toast = document.createElement("div");
-    toast.id = "toast";
-    document.body.appendChild(toast);
-  }
-
-  toast.innerText = message;
-
-  toast.style.position = "fixed";
-  toast.style.top = "25px";
-  toast.style.left = "50%";
-  toast.style.transform = "translateX(-50%)";
-  toast.style.padding = "18px 28px";
-  toast.style.borderRadius = "8px";
-  toast.style.color = "white";
-  toast.style.zIndex = "9999";
-  toast.style.fontSize = "18px"; 
-
-  if (type === "success") toast.style.background = "green";
-  else if (type === "error") toast.style.background = "red";
-  else toast.style.background = "black";
-
-  toast.style.opacity = "1";
-
-  setTimeout(() => {
-    toast.style.opacity = "0";
-  }, 1500);
-}

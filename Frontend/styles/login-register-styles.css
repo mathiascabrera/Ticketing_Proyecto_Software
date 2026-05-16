@@ -1,13 +1,6 @@
 .navindex{
     justify-content: flex-start;
 }
-.arrow-a{
-    margin-left: 2rem;
-}
-.arrow-icon{
-    color: white;
-    font-size: 4rem;
-}
 .form-section{
     border-radius: 1rem;
     border: 1px solid black;

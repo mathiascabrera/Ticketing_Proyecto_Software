@@ -1,204 +1,129 @@
-/* =========================
-   GENERAL
-========================= */
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #ffffff; /* unifica fondo */
-}
-
-/* elimina cualquier “caja” intermedia */
 .mainindex {
   display: flex;
   justify-content: center;
+  margin-bottom: 800px;
 }
+
 .sectionindex {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-
-  background: #ffffff;
+  background: #fff;
   border-radius: 14px;
-
   padding: 20px;
-
-  box-shadow: none; /* 👈 clave: elimina borde gris falso */
+  box-shadow: none;
 }
-/* =========================
-   ESCENARIO
-========================= */
-
-.welcome-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* 👈 clave */
-  margin: 25px 0;
-  gap: 6px;
-}
-
-/* ESCENARIO */
-.stage-box {
-  text-align: center;
-  background: linear-gradient(180deg, #3a3a3a, #1f1f1f);
-  color: white;
-
-  width: 100%;
-  max-width: 700px;
-
-  margin: 0 auto;
-
-  padding: 28px 0;
-  border-radius: 14px;
-
-  font-size: 36px;
+.title_escenario{
   font-weight: bold;
-  letter-spacing: 4px;
-
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.4),
-    inset 0 2px 0 rgba(255,255,255,0.05);
-}
-.subtitle {
-  font-size: 14px;
-  color: #666;
-  text-align: center;
-  margin: 0;
-  text-align: center;
 }
 
-/* =========================
-   CONTENEDOR ASIENTOS
-========================= */
-
-#seats-container {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
+.stage {
+    width: 900px;
+    height: 60px;
+    margin: 20px auto;
+    background: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top: 750px;
 }
 
-/* =========================
-   TITULOS SECTOR
-========================= */
-
-h3 {
-  margin: 18px 0 10px 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
+.map {
+    margin: auto;
+    display: grid;
+    grid-auto-rows: 32px;
+    grid-auto-columns: 32px;
+    justify-content: center;
+    border: 2px solid #ddd;
 }
 
-/* =========================
-   FILAS DE ASIENTOS
-========================= */
-
-.seat-row {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 8px;
+.disabled-ui {
+    opacity: 0.45;
+    pointer-events: none;
 }
 
-/* =========================
-   BUTACAS
-========================= */
+.cell {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .seat {
-  width: 32px;
-  height: 30px;
-  border-radius: 8px 8px 4px 4px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 9px;
-  font-weight: bold;
-  color: white;
-
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  box-shadow: inset 0 -3px 0 rgba(0,0,0,0.25);
+    width: 22px;
+    height: 22px;
+    font-size: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
 }
 
-.seat::after {
-  content: "";
-  position: absolute;
-  top: -3px;
-  width: 60%;
-  height: 4px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 3px;
+.available { background: #ddd; }
+.occupied { background: #f84b4b; color: white; cursor: not-allowed; }
+.reserved { background: #f0ad4e; color: black; cursor: not-allowed; }
+.selected { background: #28a745; color: white; }
+
+.bottom-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px;
+    background: rgba(255,255,255,0.95);
+    border-top: 1px solid #ddd;
 }
-
-.seat:hover {
-  transform: scale(1.2);
-}
-
-/* =========================
-   ESTADOS
-========================= */
-
-.available {
-  background: #2ecc71;
-}
-
-.reserved {
-  background: #f39c12;
-  cursor: not-allowed;
-  opacity: 0.85;
-}
-
-.sold {
-  background: #e74c3c;
-  cursor: not-allowed;
-  opacity: 0.85;
-}
-
-/* seleccionado */
-.selected {
-  outline: 3px solid #3498db;
-  transform: scale(1.15);
-}
-
-/* =========================
-   BOTONES
-========================= */
 
 button {
-  min-width: 120px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-/* =========================
-   BANNER
-========================= */
-
-.status-banner {
-  display: none;
-  text-align: center;
-  padding: 10px 18px;
-  border-radius: 8px;
-  margin-top: 15px;
-  color: white;
-  font-weight: bold;
+#btnReserve {
+    background: #007bff;
 }
 
-/* tipos */
-.status-info {
-  background: #3498db;
+#btnConfirm {
+    background: #28a745;
 }
 
-.status-success {
-  background: #2ecc71;
+#btnCancel {
+    background: #dc3545;
+    display:none;
 }
 
-.status-warning {
-  background: #f39c12;
+#btnReserve,
+#btnConfirm,
+#btnCancel{
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
-.status-error {
-  background: #e74c3c;
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
+#toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: .3s;
+    pointer-events: none;
+}
+
+#toast.show {
+    opacity: 1;
+}
