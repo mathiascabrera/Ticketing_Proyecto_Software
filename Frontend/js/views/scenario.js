@@ -1,6 +1,7 @@
 import { reservationService } from '../Services/reservationService.js';
 import { SeatMap } from '../Components/seatMap.js';
 import { Toast } from '../Components/toast.js';
+import { authService } from '../Services/authService.js';
 
 class ScenarioView {
     constructor() {
@@ -19,6 +20,10 @@ class ScenarioView {
     }
 
     async init() {
+        const token = authService.getToken();
+
+        reservationService.setToken(token);
+
         await this.loadSeats();
         this.setupEventListeners();
     }

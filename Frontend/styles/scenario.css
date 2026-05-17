@@ -8,7 +8,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  background: #fff;
+  background: #ffffff;
   border-radius: 14px;
   padding: 20px;
   box-shadow: none;
@@ -21,8 +21,8 @@
     width: 900px;
     height: 60px;
     margin: 20px auto;
-    background: #333;
-    color: white;
+    background: #0c0606;
+    color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +37,7 @@
     grid-auto-rows: 32px;
     grid-auto-columns: 32px;
     justify-content: center;
-    border: 2px solid #ddd;
+    border: 2px solid #ffffff;
 }
 
 .disabled-ui {

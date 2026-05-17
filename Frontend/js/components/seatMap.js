@@ -8,6 +8,7 @@ export class SeatMap {
     }
 
     render(sectors) {
+        this.sectors = sectors;
         this.container.innerHTML = "";
         const { width, height, grid } = this.calculateGrid(sectors);
         
@@ -16,27 +17,41 @@ export class SeatMap {
         this.toggleReservedMode(this.reservedMode);
     }
 
-    calculateGrid(sectors) {
-        let maxX = 0, maxY = 0;
-        sectors.forEach(s => {
-            maxX = Math.max(maxX, s.x);
-            maxY = Math.max(maxY, s.y);
+calculateGrid(sectors) {
+
+    let maxY = 0;
+
+    // 🔥 límites reales horizontales
+    const minX = Math.min(...sectors.map(s => s.x));
+    const maxX = Math.max(...sectors.map(s => s.x + s.cols));
+
+    // 🔥 ancho REAL ocupado por sectores
+    const width = maxX - minX;
+
+    sectors.forEach(s => {
+        const rows = Math.ceil(s.seats.length / s.cols);
+        maxY = Math.max(maxY, s.y + rows);
+    });
+
+    const height = maxY +5;
+
+    const grid = Array(width * height).fill(null);
+
+    sectors.forEach(sector => {
+
+        sector.seats.forEach((seat, i) => {
+
+            // 🔥 normalizar respecto al mínimo X
+            const x = (sector.x - minX) + (i % sector.cols);
+
+            const y = sector.y + Math.floor(i / sector.cols);
+
+            grid[y * width + x] = seat;
         });
+    });
 
-        const width = maxX + 30;
-        const height = maxY + 30;
-        const grid = Array(width * height).fill(null);
-
-        sectors.forEach(sector => {
-            sector.seats.forEach((seat, i) => {
-                const x = sector.x + (i % sector.cols);
-                const y = sector.y + Math.floor(i / sector.cols);
-                grid[y * width + x] = seat;
-            });
-        });
-
-        return { width, height, grid };
-    }
+    return { width, height, grid };
+}
 
     setupGridContainer(width, height) {
         this.container.style.gridTemplateColumns = `repeat(${width}, 32px)`;
@@ -73,7 +88,7 @@ export class SeatMap {
         inner.className = cls;
         inner.innerText = seat.rowIdentifier + seat.seatNumber;
         /* console.log(seat) */
-        /* inner.onclick = () => this.onSeatClick(seat); */
+        inner.onclick = () => this.onSeatClick(seat); 
         /* inner.onclick = () => console.log(seat); */
         /* inner.onclick = () => handleSeatClick(seat); */
         return inner;
@@ -86,7 +101,7 @@ export class SeatMap {
         } else {
             this.selectedSeats.splice(index, 1);
         }
-        this.render(this.gridToSectors());
+        this.render(this.sectors);
     }
 
     toggleReservedMode(enabled) {
@@ -100,15 +115,11 @@ export class SeatMap {
 
     clearSelection() {
         this.selectedSeats = [];
-        this.render(this.gridToSectors());
+        this.render(this.sectors);
     }
 
     getSelectedSeats() {
         return [...this.selectedSeats];
     }
 
-    gridToSectors() {
-        // Reconstruir sectors desde grid para re-render
-        return this.grid.filter(cell => cell !== null);
-    }
 }

@@ -33,7 +33,7 @@ var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
 
 
-
+builder.WebHost.UseUrls("https://localhost:7269");
 
 // =========================
 // CORS (UNO SOLO)

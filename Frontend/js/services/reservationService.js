@@ -9,25 +9,31 @@ class ReservationService {
         this.token = token;
     }
 
-    async getSeats(eventId) {
-        try {
-            const response = await fetch(`${API_BASE}/v1/${eventId}/seats`);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
+async getSeats(eventId) {
+
+    try {
+        const response = await fetch(`${API_BASE}/v1/${eventId}/seats`, {
+            headers: {
+                "Authorization": `Bearer ${this.token}`
             }
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching seats:", error);
-            return [];
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
         }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching seats:", error);
+        return [];
     }
+}
 
     async createReservation(seatIds) {
         try {
             const response = await fetch(`${API_BASE}/Reservations`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${this.token}`
                 },
                 body: JSON.stringify({ seatsIds: seatIds })
             });

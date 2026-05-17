@@ -11,7 +11,7 @@ using Application.UsesCases.Events.Commands;
 namespace TicketApi.Controllers
 {
     [Route("api/v1/")]
-    // [Authorize] HABILITAR CUANDO SE TERMINE EL PROYECTO
+    [Authorize] //HABILITAR CUANDO SE TERMINE EL PROYECTO ///////////////////////////////////////////////////////////////////////////////////
     [ApiController]
     public class EventsController : ControllerBase
     {
@@ -41,19 +41,10 @@ namespace TicketApi.Controllers
         }
 
         // -------------------------
-        // GET EVENT BY ID      (NO IMPLEMENTADO)
-        // -------------------------
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // -------------------------
         // CREATE EVENT       
         // -------------------------
         [HttpPost]
-       // [Authorize(Roles = "Admin")]   HABILITAR CUANDO SE TERMINE EL PROYECTO 
+       // [Authorize(Roles = "Admin")]   HABILITAR CUANDO SE TERMINE EL PROYECTO /////////////////////////////////////////////////////////////////////////
         public async Task<IActionResult> Create([FromBody] CreateEventDto dto)
         {
             var command = new CreateEventCommand(dto);
@@ -61,22 +52,6 @@ namespace TicketApi.Controllers
             var id = await _createEventHandler.Handle(command);
 
             return StatusCode(201, new { id });
-        }
-
-        // -------------------------
-        // ACTUALIZAR EVENT BY ID   (NO IMPLEMENTADO)
-        // -------------------------
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // -------------------------
-        // DELETE EVENT     (NO IMPLEMENTADO)
-        // -------------------------
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
 
         // -------------------------
@@ -94,7 +69,7 @@ namespace TicketApi.Controllers
 
         [HttpGet("soloAdmin")]
         [Authorize(Roles = "Admin")]
-        public  IActionResult testGet()
+        public  IActionResult testAdmin()
         {
 
             return Ok("solo administador ok");

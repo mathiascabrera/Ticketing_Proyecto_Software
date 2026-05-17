@@ -11,6 +11,7 @@ using System.Security.Claims;
 namespace Api4.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ReservationsController : ControllerBase
     {
