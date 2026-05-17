@@ -35,19 +35,9 @@ namespace Api4.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            try
-            {
-                var result = await _handler.Handle(command, userId);
-                return Ok(result);
-            }
-            catch (BusinessException ex)
-            {
-                return Conflict(ex.Message);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
+            var result = await _handler.Handle(command, userId);
+            return Ok(result);
+
         }
 
         // -------------------------
@@ -57,19 +47,10 @@ namespace Api4.Controllers
         //[Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> ConfirmReservation([FromBody] ConfirmSeatCommand command)
         {
-            try
-            {
-                var result = await _confirmSeatHandler.Handle(command);
-                return Ok(result);
-            }
-            catch (BusinessException ex)
-            {
-                return Conflict(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error");
-            }
+
+            var result = await _confirmSeatHandler.Handle(command);
+            return Ok(result);
+
         }
 
 

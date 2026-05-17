@@ -11,7 +11,7 @@ using Application.UsesCases.Events.Commands;
 namespace TicketApi.Controllers
 {
     [Route("api/v1/")]
-    //[Authorize]
+    // [Authorize] HABILITAR CUANDO SE TERMINE EL PROYECTO
     [ApiController]
     public class EventsController : ControllerBase
     {
@@ -50,9 +50,10 @@ namespace TicketApi.Controllers
         }
 
         // -------------------------
-        // CREATE EVENT         (NO IMPLEMENTADO) en eso.......
+        // CREATE EVENT       
         // -------------------------
         [HttpPost]
+       // [Authorize(Roles = "Admin")]   HABILITAR CUANDO SE TERMINE EL PROYECTO 
         public async Task<IActionResult> Create([FromBody] CreateEventDto dto)
         {
             var command = new CreateEventCommand(dto);
@@ -89,7 +90,17 @@ namespace TicketApi.Controllers
 
             return Ok(result);
         }
-        
+
+
+        [HttpGet("soloAdmin")]
+        [Authorize(Roles = "Admin")]
+        public  IActionResult testGet()
+        {
+
+            return Ok("solo administador ok");
+        }
+
+
 
 
 

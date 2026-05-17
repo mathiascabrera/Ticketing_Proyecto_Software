@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using TicketApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,10 +26,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddScoped<JwtService>();
-
-
-
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
@@ -128,18 +127,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // =========================
 // DEPENDENCY INJECTION
 // =========================
@@ -187,131 +174,18 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("AllowAll");
-
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
-
-// =========================
-// SEED DATA 
-// =========================
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-    Console.WriteLine(userManager == null);
+    var services = scope.ServiceProvider;
 
-    // EVENTS SEED
-    if (!context.Events.Any())
-    {
-        var evento = new Event
-        {
-            Name = "Concierto Rock",
-            EventDate = DateTime.UtcNow.AddMonths(1),
-            Venue = "Estadio Central",
-            Status = "Active"
-        };
-
-        context.Events.Add(evento);
-        context.SaveChanges();
-
-        var sectorA = new Sector
-        {
-            Name = "Platea A",
-            Price = 10000,
-            Capacity = 50,
-            EventId = evento.Id
-        };
-
-        var sectorB = new Sector
-        {
-            Name = "Platea B",
-            Price = 8000,
-            Capacity = 50,
-            EventId = evento.Id
-        };
-
-        context.Sectors.AddRange(sectorA, sectorB);
-        context.SaveChanges();
-
-        foreach (var sector in new[] { sectorA, sectorB })
-        {
-            for (char row = 'A'; row <= 'E'; row++)
-            {
-                for (int num = 1; num <= 10; num++)
-                {
-                    context.Seats.Add(new Seat
-                    {
-                        Id = Guid.NewGuid(),
-                        SectorId = sector.Id,
-                        RowIdentifier = row.ToString(),
-                        SeatNumber = num,
-                        Status = SeatStatus.Available
-                    });
-                }
-            }
-        }
-
-        context.SaveChanges();
-    }
-
-    using (var rolescope = app.Services.CreateScope())
-    {
-        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-        string[] roles = { "Admin", "User" };
-
-        foreach (var role in roles)
-        {
-            if (!await roleManager.RoleExistsAsync(role))
-            {
-                await roleManager.CreateAsync(new IdentityRole(role));
-            }
-        }
-    }
-
-
-    using (var adminScope = app.Services.CreateScope())
-    {
-        var adminUserManager = adminScope.ServiceProvider
-            .GetRequiredService<UserManager<User>>();
-
-        var adminRoleManager = adminScope.ServiceProvider
-            .GetRequiredService<RoleManager<IdentityRole>>();
-
-        // crear rol Admin si no existe
-        if (!await adminRoleManager.RoleExistsAsync("Admin"))
-        {
-            await adminRoleManager.CreateAsync(new IdentityRole("Admin"));
-        }
-
-        // buscar admin
-        var adminUser = await adminUserManager.FindByEmailAsync("admin@admin.com");
-
-        // si no existe, crearlo
-        if (adminUser == null)
-        {
-            var user = new User
-            {
-                UserName = "Admin",
-                Email = "admin@admin.com",
-                EmailConfirmed = true
-            };
-
-            var result = await adminUserManager.CreateAsync(user, "admin123");
-
-            if (result.Succeeded)
-            {
-                await adminUserManager.AddToRoleAsync(user, "Admin");
-            }
-        }
-    }
-
-
+    await DbSeeder.SeedAsync(services);
 }
+
 
 app.Run();

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class inti : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,10 +56,13 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     EventDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Venue = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Venue = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Url1 = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Url2 = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -223,8 +226,12 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EventId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false, defaultValue: 0.00m),
-                    Capacity = table.Column<int>(type: "int", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0.00m),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    Rows = table.Column<int>(type: "int", nullable: false),
+                    Cols = table.Column<int>(type: "int", nullable: false),
+                    GridX = table.Column<int>(type: "int", nullable: false),
+                    GridY = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -255,7 +262,8 @@ namespace Infrastructure.Migrations
                         name: "FK_SEAT_SECTOR_SectorId",
                         column: x => x.SectorId,
                         principalTable: "SECTOR",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -349,9 +357,10 @@ namespace Infrastructure.Migrations
                 column: "SectorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SECTOR_EventId",
+                name: "IX_SECTOR_EventId_Name",
                 table: "SECTOR",
-                column: "EventId");
+                columns: new[] { "EventId", "Name" },
+                unique: true);
         }
 
         /// <inheritdoc />

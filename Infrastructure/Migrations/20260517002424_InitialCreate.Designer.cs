@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260513140313_inti")]
-    partial class inti
+    [Migration("20260517002424_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,20 +68,34 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Url1")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Url2")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("Venue")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -182,7 +196,16 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
+                    b.Property<int>("Cols")
+                        .HasColumnType("int");
+
                     b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GridX")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GridY")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -192,13 +215,16 @@ namespace Infrastructure.Migrations
 
                     b.Property<decimal>("Price")
                         .ValueGeneratedOnAdd()
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)")
                         .HasDefaultValue(0.00m);
 
+                    b.Property<int>("Rows")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId");
+                    b.HasIndex("EventId", "Name")
+                        .IsUnique();
 
                     b.ToTable("SECTOR", (string)null);
                 });
@@ -444,7 +470,8 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.Sector", "SectorObj")
                         .WithMany("SeatsList")
-                        .HasForeignKey("SectorId");
+                        .HasForeignKey("SectorId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("SectorObj");
                 });

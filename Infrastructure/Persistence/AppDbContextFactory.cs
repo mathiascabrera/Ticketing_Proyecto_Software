@@ -15,7 +15,7 @@ namespace Infrastructure.Persistence
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
             optionsBuilder.UseSqlServer(
-                "Server=localhost\\SQLEXPRESS02;Database=TicketDB;Trusted_Connection=True;TrustServerCertificate=True;"
+                "Server=(localdb)\\MSSQLLocalDB;Database=TicketDb;Trusted_Connection=True;TrustServerCertificate=True;"
             );
 
             return new AppDbContext(optionsBuilder.Options);

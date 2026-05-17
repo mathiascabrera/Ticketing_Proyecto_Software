@@ -37,17 +37,17 @@ namespace Application.UsesCases.Reservations.Handlers
 
             try
             {
-                // 1. Traer asientos
+                //  Traer asientos
                 var seats = await _seatRepository.GetByIdsAsync(command.SeatsIds);
 
                 if (seats.Count != command.SeatsIds.Count)
                     throw new BusinessException("Algunos asientos no existen");
 
-                // 2. Validar disponibilidad REAL
+                //  Validar disponibilidad REAL
                 if (seats.Any(s => s.Status != SeatStatus.Available))
                     throw new BusinessException("Uno o más asientos ya están reservados");
 
-                // 3. Crear reserva
+                //  Crear reserva
                 var reservation = new Reservation
                 {
                     Id = Guid.NewGuid(),
@@ -58,7 +58,7 @@ namespace Application.UsesCases.Reservations.Handlers
                     Seats = new List<ReservationSeat>()
                 };
 
-                // 4. Marcar asientos como reservados + vincular
+                //  Marcar asientos como reservados + vincular
                 foreach (var seat in seats)
                 {
                     seat.Status = SeatStatus.Reserved;
@@ -71,20 +71,20 @@ namespace Application.UsesCases.Reservations.Handlers
                     });
                 }
 
-                // 5. Guardar reserva
+                // Guardar reserva
                 await _reservationRepository.AddAsync(reservation);
 
-                // 6. Guardar cambios (incluye Seats con RowVersion)
+                // Guardar cambios (incluye Seats con RowVersion)
                 await _uow.SaveChangesAsync();
 
                 await _uow.CommitAsync();  //---- ROLLBACK ---- se confirma la transaccion y los cambios quedan permanentes 
 
-                // 7. Auditoría (no rompe flujo)
+                //  Auditoría (no rompe flujo)
                 await SafeAudit(new AuditLog
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Action = "ReserveSeats",
+                    Action = "RESERVATION_SUCCESS",
                     EntityType = "Reservation",
                     EntityId = reservation.Id.ToString(),
                     Details = $"Seats: {string.Join(",", command.SeatsIds)}",
@@ -95,6 +95,7 @@ namespace Application.UsesCases.Reservations.Handlers
                 {
                     ReservationId = reservation.Id,
                     Message = "Reserva exitosa"
+                    // ver lo de datetime expired para pasar al front 
                 };
             }
             catch (DbUpdateConcurrencyException)
@@ -105,7 +106,7 @@ namespace Application.UsesCases.Reservations.Handlers
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Action = "ReserveSeats",
+                    Action = "RESERVATION_FAILED",
                     EntityType = "Reservation",
                     Details = "Conflicto de concurrencia (RowVersion)",
                     CreatedAt = DateTime.UtcNow
@@ -121,7 +122,7 @@ namespace Application.UsesCases.Reservations.Handlers
                 {
                     Id = Guid.NewGuid(),
                     UserId = userId,
-                    Action = "ReserveSeats",
+                    Action = "RESERVATION_FAILED",
                     EntityType = "Reservation",
                     EntityId = string.Join(",", command.SeatsIds),
                     Details = $"Error: {ex.Message}",

@@ -26,7 +26,7 @@ namespace TicketApi.Controllers
         }
 
         // -------------------------
-        // REGISTER
+        // REGISTER                       // PREGUNTAR DONDE METEMOS LA LOGICA DEL LOGIN , O SI POR SER LOGIS ESTAN BIEN QUE ESTE UN POCO CARGADOR LOS CONTROLLER
         // -------------------------
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)

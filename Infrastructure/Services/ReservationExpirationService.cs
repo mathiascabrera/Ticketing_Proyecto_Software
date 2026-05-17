@@ -66,7 +66,7 @@ namespace Infrastructure.Services
                 {
                     Id = Guid.NewGuid(),
                     UserId = reservation.UserId,
-                    Action = "ReservationExpired",
+                    Action = "RESERVATION_EXPIRED",
                     EntityType = "Reservation",
                     EntityId = reservation.Id.ToString(),
                     Details = $"Reservation expired automatically",
