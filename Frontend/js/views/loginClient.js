@@ -9,20 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // ✅ Datos EXACTOS como Swagger
         const loginData = {
             Email: emailInput.value.trim(),
             Password: passwordInput.value
         };
 
-        console.log('📤 Enviando:', loginData);
+        console.log('📤 Sending:', loginData);
 
-        // Loading
         const btn = form.querySelector('button[type="submit"]');
         btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Iniciando...';
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Getting started...';
 
-        // ✅ LLAMADA SIMPLE
         const result = await authService.login(loginData);
         console.log(result)
 
@@ -31,20 +28,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (result.success) {
             console.log('✅ Login OK:', result.data.user);
-            showNotification(`¡Bienvenido ${result.data.user.UserName}!`, 'success');
+            showNotification(`Welcome ${result.data.user.UserName}!`, 'success');
             
-            // Redirigir
             setTimeout(() => {
                 window.location.href = './events.html';
             }, 1500);
         } else {
-            console.error('❌ Login falló:', result.error);
+            console.error('❌ Login fail:', result.error);
             showNotification(result.error, 'error');
             passwordInput.value = '';
         }
     });
 
-    // Cancel
     document.querySelector('.btn-cancel').addEventListener('click', (e) => {
         e.preventDefault();
         window.location.href = './index.html';

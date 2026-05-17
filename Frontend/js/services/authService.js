@@ -28,14 +28,13 @@ class AuthService {
                 data: data
             };
         } catch (error) {
-            console.error('Error de red:', error);
+            console.error('Network error:', error);
             return {
                 success: false,
-                error: 'Error de conexión. Verifica que el servidor esté corriendo.'
+                error: 'Connection error. Verify that the server is running.'
             };
         }
     }
-    // LOGIN CORREGIDO ✅
     async login(loginData) {
         return fetch('https://localhost:7269/api/Auth/login', {
             method: 'POST',
@@ -48,33 +47,30 @@ class AuthService {
         })
             .then(response => {
                 console.log('Status:', response.status);
-                return response.text(); // ← TEXTO PRIMERO
+                return response.text(); 
             })
             .then(text => {
                 console.log('Raw response:', text);
-
-                // Intentar parsear JSON
                 let data;
                 try {
                     data = JSON.parse(text);
                 } catch (e) {
-                    throw new Error(text || 'Respuesta inválida');
+                    throw new Error(text || 'Invalid answer');
                 }
 
                 if (data.token && data.user) {
-                    // ✅ ÉXITO - Guardar datos
                     localStorage.setItem('authToken', data.token);
                     localStorage.setItem('currentUser', JSON.stringify(data.user));
                     return { success: true, data };
                 } else {
-                    throw new Error(data?.message || 'Respuesta inválida');
+                    throw new Error(data?.message || 'Invalid answer');
                 }
             })
             .catch(error => {
                 console.error('Login error:', error);
                 return {
                     success: false,
-                    error: error.message.includes('Usuario') ? error.message : 'Error en login'
+                    error: error.message.includes('Usuario') ? error.message : 'Login error'
                 };
             });
     }

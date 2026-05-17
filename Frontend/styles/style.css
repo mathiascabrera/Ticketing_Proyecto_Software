@@ -18,9 +18,21 @@ html {
     align-items: center;
     justify-content: flex-end;
 }
+
 .nav-container{
     display: flex;
-    justify-content: flex-end;
+    justify-content:flex-end;
+}
+.nav-two-elements{
+    width: 100%;
+    justify-content:space-between;
+}
+.arrow-a{
+    margin-left: 2rem;
+}
+.arrow-icon{
+    color: white;
+    font-size: 4rem;
 }
 .mainindex{
     display: flex;
@@ -44,4 +56,20 @@ html {
     color: #FDFFFC;
     font-size: 2rem;
     text-align: center;
+}
+.btn-log-out{
+    font-size: 2rem;
+    margin-right: 4rem;
+    border-radius: 0.8rem;
+    text-decoration: none;
+    color: #fff;
+    transition: .1s;
+    /* background-color: red; */
+}
+.fa-arrow-right-from-bracket{
+    font-size: 2rem;
+    color: #fff;
+}
+.btn-log-out:hover{
+    font-weight: bold;
 }

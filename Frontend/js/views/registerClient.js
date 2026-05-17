@@ -8,13 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordInput = document.getElementById('InputPasswordRegister');
     const confirmPasswordInput = document.getElementById('ConfirmInputPasswordRegister');
 
-    // Validación en tiempo real
     setupRealTimeValidation();
 
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Obtener y validar datos
         const userData = {
             userName: nameInput.value.trim(),
             email: emailInput.value.trim(),
@@ -27,38 +25,34 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Mostrar loading
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Registrando...';
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Registering...';
         submitBtn.disabled = true;
 
         try {
             const result = await authService.register(userData);
             
             if (result.success) {
-                showNotification(result.data.message || 'Registro exitoso', 'success');
+                showNotification(result.data.message || 'Successful registration', 'success');
                 
-                // Redirigir a login después de 2 segundos
                 setTimeout(() => {
                     window.location.href = './loginClient.html';
                 }, 2000);
             } else {
                 const errorMessage = result.error?.message || 
                                    result.error?.[0]?.description || 
-                                   'Error en el registro';
+                                   'Registration error';
                 showNotification(errorMessage, 'error');
             }
         } catch (error) {
-            showNotification('Error de conexión. Inténtalo de nuevo.', 'error');
+            showNotification('Connection error. Please try again.', 'error');
         } finally {
-            // Restaurar botón
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
         }
     });
 
-    // Cancelar - redirigir a login
     const cancelBtn = document.querySelector('.btn-cancel');
     cancelBtn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -68,19 +62,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function validateForm(userData, confirmPassword) {
     if (!userData.userName || userData.userName.length < 3) {
-        return { isValid: false, message: 'El nombre debe tener al menos 3 caracteres' };
+        return { isValid: false, message: 'The name must be at least 3 characters long' };
     }
 
     if (!userData.email || !isValidEmail(userData.email)) {
-        return { isValid: false, message: 'Email inválido' };
+        return { isValid: false, message: 'Invalid email' };
     }
 
     if (!userData.password || userData.password.length < 6) {
-        return { isValid: false, message: 'La contraseña debe tener al menos 6 caracteres' };
+        return { isValid: false, message: 'The password must be at least 6 characters long' };
     }
 
     if (userData.password !== confirmPassword) {
-        return { isValid: false, message: 'Las contraseñas no coinciden' };
+        return { isValid: false, message: 'The passwords do not match' };
     }
 
     return { isValid: true };
@@ -116,19 +110,19 @@ function validateField(input) {
         case 'InputNameRegister':
             if (value.length < 3) {
                 isValid = false;
-                errorMessage = 'Mínimo 3 caracteres';
+                errorMessage = 'Minimum 3 characters';
             }
             break;
         case 'InputEmailRegister':
             if (!isValidEmail(value)) {
                 isValid = false;
-                errorMessage = 'Email inválido';
+                errorMessage = 'Invalid email';
             }
             break;
         case 'InputPasswordRegister':
             if (value.length < 6) {
                 isValid = false;
-                errorMessage = 'Mínimo 6 caracteres';
+                errorMessage = 'Minimum 6 characters';
             }
             break;
     }
