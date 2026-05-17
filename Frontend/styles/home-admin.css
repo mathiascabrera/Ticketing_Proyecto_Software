@@ -1,0 +1,44 @@
+.section-admin{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    height: 30rem;
+}
+.text-welcome{
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 2.5rem;
+}
+.btn-add-event{
+    background-color: #28a745;
+}
+.btn-view-event{
+    background-color: #f0ad4e;
+}
+.btn-reserve-seats{
+    background-color: #0083ef;
+}
+
+.btn-add-event,
+.btn-view-event,
+.btn-reserve-seats{
+    font-size:3rem;
+    width: 35rem;
+    border-radius: 1.3rem;
+    border: none;
+}
+.btn-add-event:hover,
+.btn-view-event:hover,
+.btn-reserve-seats:hover{
+    font-weight: bold;
+}
+.btn-add-event:hover{
+    background-color: #2d8f44;
+}
+.btn-view-event:hover{
+    background-color: #de9835;
+}
+.btn-reserve-seats:hover{
+    background-color: #0a65af;
+}
