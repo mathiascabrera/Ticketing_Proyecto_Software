@@ -1,0 +1,35 @@
+.section-admin{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    height: 15rem;
+}
+.text-welcome{
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 2.5rem;
+}
+.btn-add-event{
+    background-color: #28a745;
+}
+.btn-view-event{
+    background-color: #0083ef;
+}
+.btn-add-event,
+.btn-view-event{
+    font-size:3rem;
+    width: 35rem;
+    border-radius: 1.3rem;
+    border: none;
+}
+.btn-add-event:hover,
+.btn-view-event:hover{
+    font-weight: bold;
+}
+.btn-add-event:hover{
+    background-color: #2d8f44;
+}
+.btn-view-event:hover{
+    background-color: #0a65af;
+}
