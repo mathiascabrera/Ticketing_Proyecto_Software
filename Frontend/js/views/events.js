@@ -20,3 +20,34 @@ if (document.readyState === 'loading') {
 } else {
     loadEvents();
 }
+
+function getRoleFromToken() {
+    const token = localStorage.getItem("token");
+
+    if (!token) return null;
+
+    const payload = JSON.parse(atob(token.split(".")[1]));
+
+    return payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+   // alert(" events.js está ejecutándose");
+    const role = getRoleFromToken();
+    const container = document.getElementById("eventsContainer");
+
+    console.log("ROLE:", role);
+
+    if (role && role.toLowerCase() === "admin") {
+
+        const btn = document.createElement("button");
+        btn.className = "btn btn-primary mt-3";
+        btn.innerText = "⬅ Volver al admin";
+
+        btn.onclick = () => {
+            window.location.href = "./homeAdmin.html";
+        };
+
+        container.appendChild(btn);
+    }
+});

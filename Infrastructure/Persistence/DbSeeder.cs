@@ -113,42 +113,113 @@ namespace Infrastructure.Persistence
 
             if (!eventExists)
             {
-                var dto = new CreateEventDto
+                // -------------------------
+                // EVENT 1
+                // -------------------------
+                var hobbitDto = new CreateEventDto
                 {
                     Name = "The Hobbit",
                     Date = new DateTime(2026, 6, 20, 22, 10, 0),
                     Place = "Disponible en tu Cinemacenter mas cercano",
                     Description = "Action",
                     State = "Available",
-
                     Url1 = "https://www.elcineenlasombra.com/wp-content/uploads/2014/12/the-hobbit-the-desolation-of-smaug-22982-2880x1800-copia.jpg",
-                    Url2 = "https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/6ba42b80-1619-4ed4-b250-0f0718fd3141/f6b2b5af2d4217fca21c52e6b286f67bd78c2d79.jpg?host=wbd-images.prod-vod.h264.io&partner=beamcom&w=500",
-
+                    Url2 = "",
                     Sectors = new List<CreateSectorDto>
-                {
-                    new CreateSectorDto
-                    {
-                        Name = "vip",
-                        Rows = 10,
-                        Cols = 30,
-                        Price = 5000,
-                        GridX = 15,
-                        GridY = 0
-                    },
-
-                    new CreateSectorDto
-                    {
-                        Name = "general",
-                        Rows = 30,
-                        Cols = 40,
-                        Price = 2500,
-                        GridX = 10,
-                        GridY = 11
-                    }
-                }
+        {
+            new CreateSectorDto
+            {
+                Name = "vip",
+                Rows = 10,
+                Cols = 30,
+                Price = 5000,
+                GridX = 15,
+                GridY = 0
+            },
+            new CreateSectorDto
+            {
+                Name = "general",
+                Rows = 30,
+                Cols = 40,
+                Price = 2500,
+                GridX = 10,
+                GridY = 11
+            }
+        }
                 };
 
-                await createEventHandler.Handle( new CreateEventCommand(dto) );
+                await createEventHandler.Handle(new CreateEventCommand(hobbitDto));
+
+                // -------------------------
+                // EVENT 2 - Regular Show 2
+                // -------------------------
+                var regularShowDto = new CreateEventDto
+                {
+                    Name = "Regular show 2",
+                    Date = new DateTime(2026, 5, 28, 0, 33, 0),
+                    Place = "cinemark",
+                    Description = "una nueva aventura espera",
+                    State = "activo",
+                    Url1 = "https://wallpapers.com/images/hd/regular-show-1280-x-1024-background-km8fy0mdmx29tt2p.jpg",
+                    Url2 = "",
+                    Sectors = new List<CreateSectorDto>
+        {
+            new CreateSectorDto
+            {
+                Name = "s1",
+                Rows = 20,
+                Cols = 20,
+                Price = 5,
+                GridX = 9,
+                GridY = 1
+            },
+            new CreateSectorDto
+            {
+                Name = "2",
+                Rows = 20,
+                Cols = 20,
+                Price = 5000,
+                GridX = 31,
+                GridY = 1
+            },
+            new CreateSectorDto
+            {
+                Name = "3",
+                Rows = 15,
+                Cols = 42,
+                Price = 3000,
+                GridX = 9,
+                GridY = 22
+            }
+        }
+                };
+
+                await createEventHandler.Handle(new CreateEventCommand(regularShowDto));
+
+                // -------------------------
+                // EVENT 3 - Hacker
+                // -------------------------
+                var hackerDto = new CreateEventDto
+                {
+                    Name = "Hacker",
+                    Date = new DateTime(2026, 5, 28, 0, 33, 0),
+                    Place = "cine Hoyts",
+                    Description = "curso completo de hacking etico para ganar dolares",
+                    State = "activo",
+                    Url1 = "https://i.ytimg.com/vi/mHIMRJojDec/maxresdefault.jpg",
+                    Url2 = "",
+                    Sectors = new List<CreateSectorDto>
+        {
+            new CreateSectorDto { Name = "1", Rows = 10, Cols = 15, Price = 10, GridX = 14, GridY = 2 },
+            new CreateSectorDto { Name = "2", Rows = 10, Cols = 15, Price = 10, GridX = 31, GridY = 2 },
+            new CreateSectorDto { Name = "3", Rows = 15, Cols = 15, Price = 10, GridX = 14, GridY = 13 },
+            new CreateSectorDto { Name = "4", Rows = 15, Cols = 15, Price = 10, GridX = 31, GridY = 13 },
+            new CreateSectorDto { Name = "5", Rows = 15, Cols = 5, Price = 10, GridX = 8, GridY = 13 },
+            new CreateSectorDto { Name = "6", Rows = 15, Cols = 5, Price = 10, GridX = 47, GridY = 13 }
+        }
+                };
+
+                await createEventHandler.Handle(new CreateEventCommand(hackerDto));
             }
         }
     }

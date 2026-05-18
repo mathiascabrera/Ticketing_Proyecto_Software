@@ -220,28 +220,36 @@ async function save() {
     };
 
     try {
-        const response = await fetch("https://localhost:7269/api/v1", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
+    const token = localStorage.getItem("authToken");
 
-        const result = await response.json().catch(() => null);
+    const response = await fetch("https://localhost:7269/api/v1", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(payload)
+    });
 
-        showToast("Evento guardado correctamente 🎉");
-        console.log("RESPUESTA API:", result);
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText);
+    }
+    
+    alert("evento creado");
+    showToast("Evento guardado correctamente 🎉");
+
+    console.log("Evento creado");
+
+    showToast("Evento guardado correctamente 🎉");
+    console.log("RESPUESTA API:", result);
 
     } catch (err) {
         console.error(err);
         showToast("Error al guardar el evento");
     }
+
 }
 document.getElementById("eventName").addEventListener("input", update);
 document.getElementById("eventDate").addEventListener("input", update);

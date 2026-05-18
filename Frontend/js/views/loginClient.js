@@ -30,9 +30,34 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ Login OK:', result.data.user);
             showNotification(`Welcome ${result.data.user.UserName}!`, 'success');
             
+            /*setTimeout(() => {*/
+            /*    window.location.href = './events.html';               ANTERIOR                          */     
+            /*}, 1500);*/
+
+
             setTimeout(() => {
-                window.location.href = './events.html';
+
+                const token = result.data.token;
+
+                const payload = JSON.parse(atob(token.split('.')[1]));
+
+                const role = payload[
+                    "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+                ];
+
+                localStorage.setItem("role", role);
+                localStorage.setItem("token", token);
+                
+                if (role === "Admin") {
+                    window.location.href = './homeAdmin.html';
+                } else {
+                    window.location.href = './events.html';
+                }
+
             }, 1500);
+
+
+
         } else {
             console.error('❌ Login fail:', result.error);
             showNotification(result.error, 'error');
