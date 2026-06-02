@@ -18,6 +18,7 @@
 }
 .sectionindex{
     background-color: #FDFFFC;
+    width: 80%;
 }
 .welcome-container{
     display: flex;
@@ -26,7 +27,7 @@
 }
 .welcome-text{
     font-weight: bold;
-    font-size: 5rem;
+    font-size: clamp(0.5rem, 2vw + 2rem, 5rem);
 }
 .section-pictures{
     display: flex;
@@ -34,20 +35,24 @@
     align-items: center;
 }
 .img-logo{
-    width: 20rem;
+    width: 100%;;
+    max-width: 20rem;
 }
 .img-word{
-    width: 80rem;
+    width: 100%;
+    max-width: 80rem;
 }
 .section-buttons-index{
-  width: 50rem;
+  width: 80%;
+  max-width: 50rem;
   display: flex;
   justify-content:space-around;
 }
 .btn-register-client,
 .btn-log-client{
-    font-size:3rem;
-    width: 20rem;
+    font-size:clamp(1rem, 2vw + 0.5rem, 3rem);;
+    width: 80%;
+    max-width: 20rem;
     border-radius: 1.3rem;
 }
 .btn-register-client{

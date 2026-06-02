@@ -4,17 +4,18 @@
 .form-section{
     border-radius: 1rem;
     border: 1px solid black;
-    width: 50rem;
+    width: 80%;
+    max-width: 50rem;
 }
 form{
     padding: 2rem;
 }
 .text-form{
-    font-size: 2rem;
+    font-size: clamp(0.5rem, 2vw + 0.5rem, 2rem);
     font-weight: bold;
 }
-#emailHelp{
-    font-size: 1.5rem;
+.form-text{
+    font-size: clamp(0.5rem, 2vw + 0.5rem, 1.5rem);;
 }
 #InputEmailRegister,
 #InputPasswordRegister,
@@ -28,11 +29,11 @@ form{
 #InputPasswordLoginAdmin,
 #InputEmailLoginClient,
 #InputPasswordLoginClient{
-    font-size: 2rem;
+    font-size: clamp(0.5rem, 2vw + 0.5rem, 2rem);
 }
 .btn-register,
 .btn-cancel{
-    font-size: 2rem;
+    font-size: clamp(0.5rem, 2vw + 0.5rem, 2rem);
     font-weight: bold;
     width: 100%;
 }
