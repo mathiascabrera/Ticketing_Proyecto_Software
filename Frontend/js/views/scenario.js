@@ -45,6 +45,7 @@ class ScenarioView {
         document.getElementById("btnReserve").addEventListener("click", () => this.reserve());
         document.getElementById("btnConfirm").addEventListener("click", () => this.confirm());
         document.getElementById("btnCancel").addEventListener("click", () => this.cancel());
+        document.getElementById("arrow").addEventListener("click",() => this.goTo())
     }
 
     async handleSeatClick(seat) {
@@ -101,6 +102,14 @@ class ScenarioView {
             await this.loadSeats();
         } catch (error) {
             this.toast.show("Error confirming purchase");
+        }
+    }
+
+    goTo() {
+        if(localStorage.getItem('role') === "Admin"){
+            window.location.href = './eventsAdmin.html';
+        }else{
+            window.location.href = './events.html';
         }
     }
 
