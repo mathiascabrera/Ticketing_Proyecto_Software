@@ -223,7 +223,7 @@ async function save() {
 
     const token = localStorage.getItem("authToken");
 
-    const response = await fetch("https://localhost:7269/api/v1", {
+    const response = await fetch("https://localhost:7269/api/v1/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -243,7 +243,6 @@ async function save() {
     console.log("Evento creado");
 
     showToast("Evento guardado correctamente 🎉");
-    console.log("RESPUESTA API:", result);
 
     } catch (err) {
         console.error(err);

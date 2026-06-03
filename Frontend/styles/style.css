@@ -53,11 +53,12 @@ html {
 }
 .text-footer{
     color: #FDFFFC;
-    font-size: clamp(0.5rem, 2vw + 0.1rem, 2rem);;
+    font-size: clamp(0.5rem, 2vw + 0.1rem, 2rem);
     text-align: center;
 }
 .btn-log-out{
     font-size: 2rem;
+    font-size: clamp(0.5rem, 2vw + 0.3rem, 2rem);
     margin-right: 4rem;
     border-radius: 0.8rem;
     text-decoration: none;
