@@ -20,7 +20,7 @@ namespace Infrastructure.Persistence.Repositories
         public async Task AddAsync(AuditLog log)
         {
             _context.AuditLogs.Add(log);
-            await _context.SaveChangesAsync(); // 👈 guarda inmediatamente
+            await _context.SaveChangesAsync(); // guarda auditorisa
         }
 
     }

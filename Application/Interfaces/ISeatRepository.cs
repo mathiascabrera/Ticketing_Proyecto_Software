@@ -12,7 +12,7 @@ namespace Application.Interfaces
         Task<Seat?> GetByIdAsync(Guid id);
         Task<List<Seat>> GetAllAsync();
         Task<List<Seat>> GetSeatsByEventIdAsync(int eventId);
-        Task UpdateAsync(Seat seat);
+        void Update(Seat seat);
         Task<List<Seat>> GetByIdsAsync(List<Guid> seatsIds);
         Task AddRangeAsync(IEnumerable<Seat> seats);
     }

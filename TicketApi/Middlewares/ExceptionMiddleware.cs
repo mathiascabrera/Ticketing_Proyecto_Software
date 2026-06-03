@@ -19,6 +19,20 @@
             {
                 await _next(context);
             }
+            catch (ValidationException ex)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.Response.ContentType = "application/json";
+
+                var response = new
+                {
+                    message = ex.Message
+                };
+
+                await context.Response.WriteAsync(
+                    JsonSerializer.Serialize(response)
+                );
+            }
             catch (BusinessException ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.Conflict;

@@ -9,7 +9,7 @@ namespace Application.Interfaces
 {
     public interface IReservationRepository
     {
-        public Task UpdateAsync(Reservation reservation);
+        public void Update(Reservation reservation);
         public Task<Reservation?> GetByIdAsync(Guid id);
         public Task AddAsync(Reservation reservation);
         public Task<Reservation> GetByIdWithSeats(Guid id);

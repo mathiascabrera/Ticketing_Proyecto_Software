@@ -19,10 +19,9 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task UpdateAsync(Reservation reservation)
+        public void Update(Reservation reservation)//modificar de async a void 
         {
             _context.Reservations.Update(reservation);
-            await _context.SaveChangesAsync();
         }
 
         public async Task<Reservation?> GetByIdAsync(Guid id)
@@ -34,7 +33,6 @@ namespace Infrastructure.Repositories
         public async Task AddAsync(Reservation reservation)
         {
             await _context.Reservations.AddAsync(reservation);
-            await _context.SaveChangesAsync();
         }
 
 
@@ -44,8 +42,6 @@ namespace Infrastructure.Repositories
             .Include(r => r.Seats)
             .ThenInclude(rs => rs.SeatObj)
             .FirstOrDefaultAsync(r => r.Id == id);
-        }
-
-            
+        }           
     }
 }

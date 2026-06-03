@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Application.DTOs;
 using Application.UsesCases.Events.Commands;
 
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TicketApi.Controllers
@@ -34,9 +35,9 @@ namespace TicketApi.Controllers
         // GET ALL EVENT
         // -------------------------
         [HttpGet("events")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetEventByPage([FromQuery] GetEventsQuery query)
         {
-            var result = await _eventshandler.Handle(new GetEventsQuery());
+            var result = await _eventshandler.Handle(query);
             return Ok(result);
         }
 

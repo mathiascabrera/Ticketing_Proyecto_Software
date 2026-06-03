@@ -8,7 +8,6 @@ namespace Application.Interfaces
 {
     public interface IUnitOfWork
     {
-        ISeatRepository Seats { get; }
 
         Task BeginTransactionAsync();
         Task CommitAsync();

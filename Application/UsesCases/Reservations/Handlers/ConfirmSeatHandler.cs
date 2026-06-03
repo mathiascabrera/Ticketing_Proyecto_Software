@@ -16,70 +16,74 @@ namespace Application.UsesCases.Reservations.Handlers
         private readonly IReservationRepository _reservationRepository;
         private readonly ISeatRepository _seatRepository;
         private readonly IAuditLogRepository _auditLogRepository;
-
+        private readonly IUnitOfWork _uow;
         public ConfirmSeatHandler(
             IReservationRepository reservationRepository,
             ISeatRepository seatRepository,
-            IAuditLogRepository auditLogRepository)
+            IAuditLogRepository auditLogRepository,
+            IUnitOfWork uow)
         {
             _reservationRepository = reservationRepository;
             _seatRepository = seatRepository;
             _auditLogRepository = auditLogRepository;
+            _uow = uow;
         }
 
         public async Task<ConfirmSeatResponse> Handle(ConfirmSeatCommand command)
         {
+            string userId = "";
 
-            string userid="" ; 
-            
             try
             {
-                //  Buscar reserva con asientos
                 var reservation = await _reservationRepository.GetByIdWithSeats(command.ReservationId);
-                userid = reservation.UserId;
 
                 if (reservation == null)
                     throw new BusinessException("Reservation not found");
 
-                //  Validar estado
+                userId = reservation.UserId;
+
                 if (reservation.Status != ReservationStatus.Pending)
                     throw new BusinessException("Invalid reservation state");
 
-                //  Validar expiración
+                // Expirada (sin transacción iniciada innecesariamente )
                 if (reservation.ExpiresAt < DateTime.UtcNow)
                 {
                     reservation.Status = ReservationStatus.Expired;
-                    await _reservationRepository.UpdateAsync(reservation);
+                    await _uow.SaveChangesAsync();
 
                     throw new BusinessException("Reservation expired");
                 }
 
-                //  Obtener TODOS los asientos
                 var seats = reservation.Seats
                     .Select(rs => rs.SeatObj)
                     .ToList();
 
-                if (seats.Count == 0)
+                if (!seats.Any())
                     throw new BusinessException("No seats in reservation");
 
-                //  Actualizar TODOS los asientos
-                foreach (var seat in seats)
+                await _uow.BeginTransactionAsync();
+
+                try
                 {
-                    seat.Status = SeatStatus.Sold;
+                    foreach (var seat in seats)
+                        seat.Status = SeatStatus.Sold;
+
+                    reservation.Status = ReservationStatus.Paid;
+
+                    await _uow.SaveChangesAsync();
+                    await _uow.CommitAsync();
+                }
+                catch
+                {
+                    await _uow.RollbackAsync();
+                    throw;
                 }
 
-                //  Confirmar reserva
-                reservation.Status = ReservationStatus.Paid;
-
-                //  Guardar todo
-                await _reservationRepository.UpdateAsync(reservation);
-               // await _seatRepository.UpdateRangeAsync(seats);
-
-                //  Auditoría éxito
-                await _auditLogRepository.AddAsync(new AuditLog
+                // Auditoría guarda la tansaccion exitosa (fuera de la transacción de negocio)
+                await SafeAudit(new AuditLog
                 {
                     Id = Guid.NewGuid(),
-                    UserId = reservation.UserId,
+                    UserId = userId,
                     Action = "CONFIRM_SUCCESS",
                     EntityType = "Reservation",
                     EntityId = reservation.Id.ToString(),
@@ -90,18 +94,17 @@ namespace Application.UsesCases.Reservations.Handlers
                 return new ConfirmSeatResponse
                 {
                     ReservationId = reservation.Id,
-                   // SeatIds = seats.Select(s => s.Id).ToList(),
                     Status = reservation.Status.ToString(),
                     ConfirmedAt = DateTime.UtcNow
                 };
             }
             catch (Exception ex)
             {
-                //  Auditoría fallo
-                await _auditLogRepository.AddAsync(new AuditLog
+                // Auditoría de fallo (sin transacción de reserva)
+                await SafeAudit(new AuditLog
                 {
                     Id = Guid.NewGuid(),
-                    UserId = userid,
+                    UserId = userId,
                     Action = "CONFIRM_FAILED",
                     EntityType = "Reservation",
                     EntityId = command.ReservationId.ToString(),
@@ -110,6 +113,17 @@ namespace Application.UsesCases.Reservations.Handlers
                 });
 
                 throw;
+            }
+        }
+        private async Task SafeAudit(AuditLog log) // auditoria fuera de de la transaccion por si falla no afecte a la operacion princiapl
+        {
+            try
+            {
+                await _auditLogRepository.AddAsync(log);
+            }
+            catch
+            {
+                // nunca romper flujo por auditoría
             }
         }
     }

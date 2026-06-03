@@ -64,6 +64,31 @@ namespace Infrastructure.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
+        // EVENT POR PAGINACION 
+        public async Task<List<Event>> GetPagedAsync(int page, int pageSize)
+        {
+            // Evitamos valores inválidos
+            if (page <= 0)
+                page = 1;
+
+            if (pageSize <= 0)
+                pageSize = 10;
+
+            // Calculamos cuántos registros debemos saltar
+            var skip = (page - 1) * pageSize;
+
+            return await _context.Events
+                .OrderBy(e => e.Id) // Orden estable para la paginación
+                .Skip(skip)         // Salta registros de páginas anteriores
+                .Take(pageSize)     // Toma solo los necesarios
+                .ToListAsync();
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _context.Events.CountAsync();
+        }
+
 
     }
 }

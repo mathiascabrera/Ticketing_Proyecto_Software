@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
+using Domain.Exeptions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infrastructure.Persistence
@@ -11,14 +13,12 @@ namespace Infrastructure.Persistence
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;
-        private IDbContextTransaction _transaction;
+        private IDbContextTransaction? _transaction;
 
-        public ISeatRepository Seats { get; }
-
-        public UnitOfWork(AppDbContext context, ISeatRepository seatRepository)
+        public UnitOfWork(AppDbContext context)
         {
             _context = context;
-            Seats = seatRepository;
+
         }
 
         public async Task BeginTransactionAsync()
@@ -28,17 +28,26 @@ namespace Infrastructure.Persistence
 
         public async Task CommitAsync()
         {
-            await _transaction.CommitAsync();
+            if (_transaction != null)
+                await _transaction.CommitAsync();
         }
 
         public async Task RollbackAsync()
         {
-            await _transaction.RollbackAsync();
+            if (_transaction != null)
+                await _transaction.RollbackAsync();
         }
 
         public async Task SaveChangesAsync()
         {
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ConcurrencyException();
+            }
         }
     }
 }

@@ -29,17 +29,11 @@ namespace Infrastructure.Repositories
         {
             return await _context.Seats.ToListAsync();
         }
-        public async Task UpdateAsync(Seat seat) // actualizar 1 asiento  
+        public void Update(Seat seat) // 
         {
-            try
-            {
-                _context.Seats.Update(seat);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new ConcurrencyException();
-            }
+
+            _context.Seats.Update(seat);
+
         }
         public async Task<List<Seat>> GetSeatsByEventIdAsync(int eventId) // traer todos los asientos de un evento
         {
@@ -60,9 +54,5 @@ namespace Infrastructure.Repositories
         {
             await _context.Seats.AddRangeAsync(seats);
         }
-
-
-
-
     }
 }

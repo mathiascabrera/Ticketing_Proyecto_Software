@@ -7,6 +7,7 @@ using Application.DTOs;
 using Application.Interfaces;
 using Application.UsesCases.Events.Queries;
 using Domain.Entities;
+using Domain.Exeptions;
 
 namespace Application.UsesCases.Events.Handlers
 {
@@ -19,19 +20,39 @@ namespace Application.UsesCases.Events.Handlers
             _repository = repository;
         }
 
-        public async Task<List<EventResponse>> Handle(GetEventsQuery query)
+        public async Task<PagedResponse<EventResponse>> Handle(GetEventsQuery query)
         {
-            var events = await _repository.GetAllAsync();
+            if (query.Page <= 0)
+                throw new ValidationException("Page must be greater than 0.");
 
-            return events.Select(e => new EventResponse
+            if (query.PageSize <= 0)
+                throw new ValidationException("PageSize must be greater than 0.");
+
+            var events = await _repository.GetPagedAsync(
+                query.Page,
+                query.PageSize);
+
+            var totalItems = await _repository.CountAsync();
+
+            var eventResponses = events.Select(e => new EventResponse
             {
                 Id = e.Id,
                 Name = e.Name,
                 EventDate = e.EventDate,
                 Description = e.Description,
                 Url1 = e.Url1,
-                Url2 = e.Url2,
+                Url2 = e.Url2
             }).ToList();
+
+            return new PagedResponse<EventResponse>
+            {
+                Items = eventResponses,
+                Page = query.Page,
+                PageSize = query.PageSize,
+                TotalItems = totalItems,
+                TotalPages = (int)Math.Ceiling(
+                    totalItems / (double)query.PageSize)
+            };
         }
     }
 }

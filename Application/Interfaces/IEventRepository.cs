@@ -15,5 +15,7 @@ namespace Application.Interfaces
         Task UpdateAsync(Event ev);
         Task DeleteAsync(int id);
         Task SaveAsync();
+        Task<List<Event>> GetPagedAsync(int page, int pageSize);
+        Task<int> CountAsync();
     }
 }

@@ -33,10 +33,10 @@ namespace Application.UsesCases.Reservations.Handlers
 
         public async Task<ReserveSeatsResponse> Handle(ReserveSeatsCommand command, string userId)
         {
-            await _uow.BeginTransactionAsync();  // ---- ROLLBACK ---- comienza la transanccion 
 
             try
             {
+                await _uow.BeginTransactionAsync();  // ---- ROLLBACK ---- comienza la transanccion 
                 //  Traer asientos
                 var seats = await _seatRepository.GetByIdsAsync(command.SeatsIds);
 
@@ -71,7 +71,7 @@ namespace Application.UsesCases.Reservations.Handlers
                     });
                 }
 
-                // Guardar reserva
+                // Guardar reserva sin impactar en bd
                 await _reservationRepository.AddAsync(reservation);
 
                 // Guardar cambios (incluye Seats con RowVersion)
@@ -94,8 +94,9 @@ namespace Application.UsesCases.Reservations.Handlers
                 return new ReserveSeatsResponse
                 {
                     ReservationId = reservation.Id,
-                    Message = "Reserva exitosa"
-                    // ver lo de datetime expired para pasar al front 
+                    Message = "Reserva exitosa",
+                    ExpiresAt = reservation.ExpiresAt
+                    
                 };
             }
             catch (DbUpdateConcurrencyException)
@@ -133,7 +134,7 @@ namespace Application.UsesCases.Reservations.Handlers
             }
         }
 
-        private async Task SafeAudit(AuditLog log)
+        private async Task SafeAudit(AuditLog log) // auditoria fuera de de la transaccion por si falla no afecte a la operacion princiapl
         {
             try
             {

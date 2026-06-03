@@ -10,7 +10,7 @@ namespace Application.Interfaces
 {
     public interface IGetEventsHandler
     {
-        public Task<List<EventResponse>> Handle(GetEventsQuery query);
+        Task<PagedResponse<EventResponse>> Handle(GetEventsQuery query);
 
 
     }
