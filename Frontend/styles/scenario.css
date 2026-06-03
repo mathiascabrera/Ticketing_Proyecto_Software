@@ -1,18 +1,9 @@
-.mainindex {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 800px;
+.main-scenary{
+    margin-top:8rem;
+    display: flex;
+    justify-content: center;
 }
 
-.sectionindex {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: none;
-}
 .title_escenario{
   font-weight: bold;
 }
@@ -28,7 +19,6 @@
     align-items: center;
     font-weight: bold;
     border-radius: 10px;
-    margin-top: 750px;
 }
 
 .map {
@@ -51,6 +41,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+    text-align:center;
 }
 
 .seat {

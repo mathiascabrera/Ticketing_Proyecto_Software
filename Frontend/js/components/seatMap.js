@@ -21,11 +21,11 @@ calculateGrid(sectors) {
 
     let maxY = 0;
 
-    // 🔥 límites reales horizontales
+    // límites reales horizontales
     const minX = Math.min(...sectors.map(s => s.x));
     const maxX = Math.max(...sectors.map(s => s.x + s.cols));
 
-    // 🔥 ancho REAL ocupado por sectores
+    // ancho REAL ocupado por sectores
     const width = maxX - minX;
 
     sectors.forEach(s => {
@@ -41,7 +41,7 @@ calculateGrid(sectors) {
 
         sector.seats.forEach((seat, i) => {
 
-            // 🔥 normalizar respecto al mínimo X
+            // normalizar respecto al mínimo X
             const x = (sector.x - minX) + (i % sector.cols);
 
             const y = sector.y + Math.floor(i / sector.cols);
