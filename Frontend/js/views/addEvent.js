@@ -1,7 +1,12 @@
 const grid = document.getElementById("grid");
-const json = document.getElementById("json");
-const toast = document.getElementById("toast");
+const dimensions = grid.getBoundingClientRect();
 const cell = 15;
+const rowElement = document.getElementById("rowtext");
+const colElement = document.getElementById("columntext");
+rowElement.textContent=`Rows (max ${Math.floor(dimensions.height / cell)}).`;
+colElement.textContent=`Columns (max ${Math.floor(dimensions.width / cell)}).`;
+
+const toast = document.getElementById("toast");
 const eventData = {
     name: "",
     date: "",
@@ -14,10 +19,32 @@ const eventData = {
 };
 const colors = ["#2563eb", "#16a34a", "#dc2626", "#9333ea", "#ea580c"];
 
+flatpickr("#eventDate", {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+    time_24hr: true,
+    disableMobile: true
+});
+
+function goBack(){
+    window.location.href = './homeAdmin.html';
+}
+
 function showToast(msg) {
     toast.innerText = msg;
     toast.style.opacity = 1;
+    toast.style.background= "#9a2525cc";
     setTimeout(() => toast.style.opacity = 0, 2000);
+}
+
+function showToastGreen(msg) {
+    toast.innerText = msg;
+    toast.style.opacity = 1;
+    toast.style.background= '#38bf0bcc';
+    setTimeout(() => {
+        toast.style.opacity = 0;
+        goBack();
+    }, 2000);
 }
 
 function isColliding(a, b) {
@@ -36,12 +63,12 @@ function addSector() {
     const price = document.getElementById("price").value;
 
     if (!name) {
-        showToast("El sector debe tener un nombre");
+        showToast("Attention: The sector must have a name.");
         return;
     }
 
     if (price === "" || isNaN(price) || +price <= 0) {
-        showToast("El precio debe ser mayor a 0");
+        showToast("Attention: The price must be greater than 0.");
         return;
     }
 
@@ -50,12 +77,12 @@ function addSector() {
     );
 
     if (exists) {
-        showToast("Ya existe un sector con ese nombre");
+        showToast("Attention: There is already a sector with that name.");
         return;
     }
 
-    if (rows > 60 || cols > 60) {
-        showToast("Máximo permitido: 60x60");
+    if (cols*cell > dimensions.width || rows*cell > dimensions.height) {
+        showToast(`Allowed rows: ${Math.floor(dimensions.height / cell)}. Allowed columns: ${Math.floor(dimensions.width / cell)}.`);
         return;
     }
 
@@ -191,7 +218,6 @@ function update() {
     eventData.state = document.getElementById("eventState").value;
     eventData.url1 = document.getElementById("url1").value;
     eventData.url2 = document.getElementById("url2").value;
-    json.innerText = JSON.stringify(eventData, null, 2);
 }
 
 async function save() {
@@ -200,17 +226,17 @@ async function save() {
     const place = document.getElementById("eventPlace").value.trim();
 
     if (!name) {
-        showToast("El nombre del evento es obligatorio");
+        showToast("Attention: The event name is required.");
         return;
     }
 
     if (!date) {
-        showToast("La fecha del evento es obligatoria");
+        showToast("Attention: The event date is required.");
         return;
     }
 
     if (!place) {
-        showToast("El lugar del evento es obligatorio");
+        showToast("Attention: The event venue is mandatory.");
         return;
     }
 
@@ -223,7 +249,7 @@ async function save() {
 
     const token = localStorage.getItem("authToken");
 
-    const response = await fetch("https://localhost:7269/api/v1", {
+    const response = await fetch("https://localhost:7269/api/v1/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -236,18 +262,12 @@ async function save() {
         const errorText = await response.text();
         throw new Error(errorText);
     }
-    
-    alert("evento creado");
-    showToast("Evento guardado correctamente 🎉");
 
-    console.log("Evento creado");
-
-    showToast("Evento guardado correctamente 🎉");
-    console.log("RESPUESTA API:", result);
+    showToastGreen("Event saved successfully 🎉");
 
     } catch (err) {
         console.error(err);
-        showToast("Error al guardar el evento");
+        showToast("Error saving event.");
     }
 
 }
