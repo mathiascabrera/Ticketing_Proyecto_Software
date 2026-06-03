@@ -72,3 +72,19 @@ html {
 .btn-log-out:hover{
     font-weight: bold;
 }
+.navindexevent{
+    width: 100%;
+    background-color: #0C6291;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.footerevent{
+    background-color: #0C6291;
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

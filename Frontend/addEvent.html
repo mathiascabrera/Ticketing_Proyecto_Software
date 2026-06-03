@@ -14,10 +14,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/add-event.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
 </head>
 
 <body>
-    <nav class="nav-add-event">
+    <nav class="nav-add-event navindexevent">
         <div class="nav-container nav-two-elements">
             <a class="arrow-a" href="./homeAdmin.html"><i class="fa-solid fa-circle-arrow-left arrow-icon"></i></a>
             <a class="btn-log-out" href="./index.html">Log out <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
@@ -25,70 +28,71 @@
     </nav>
     <div class="container">
         <div class="sidebar">
-            <h2>🎟 Evento</h2>
+            <h2 class="title-event-panel">🎟 Event</h2>
             <div class="field">
-                <label>Nombre</label>
+                <label class="label-txt">Name</label>
                 <input id="eventName" required>
             </div>
             <div class="field">
-                <label>Fecha</label>
-                <input type="datetime-local" id="eventDate" required>
+                <label class="label-txt">Date</label>
+                <input type="text" id="eventDate" required>
+                <!-- <input type="datetime-local" id="eventDate" required> -->
             </div>
             <div class="field">
-                <label>Lugar</label>
+                <label class="label-txt">Place</label>
                 <input id="eventPlace" required>
             </div>
             <div class="field">
-                <label>Descripción</label>
+                <label class="label-txt">Description</label>
                 <input id="eventDescription">
             </div>
             <div class="field">
-                <label>Estado</label>
+                <label class="label-txt">Status</label>
                 <select id="eventState">
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
+                    <option value="activo">Active</option>
+                    <option value="inactivo">Inactive</option>
                 </select>
             </div>
             <div class="field">
-                <label>URL 1</label>
+                <label class="label-txt">URL 1</label>
                 <input id="url1">
             </div>
             <div class="field">
-                <label>URL 2</label>
+                <label class="label-txt">URL 2</label>
                 <input id="url2">
             </div>
             <hr>
-            <h2>Sector</h2>
+            <h2 class="sector-title">Sector</h2>
             <div class="field">
-                <label>Nombre</label>
+                <label class="label-txt">Name</label>
                 <input id="sectorName">
             </div>
             <div class="field">
-                <label>Filas (max 60)</label>
+                <label class="label-txt" id="rowtext"></label>
                 <input type="number" id="rows" value="5">
             </div>
             <div class="field">
-                <label>Columnas (max 60)</label>
+                <label class="label-txt" id="columntext"></label>
                 <input type="number" id="cols" value="10">
             </div>
             <div class="field">
-                <label>Precio</label>
+                <label class="label-txt">Price</label>
                 <input type="number" id="price">
             </div>
-            <button class="btn btn-primary" onclick="addSector()">Agregar Sector</button>
-            <button class="btn btn-success" onclick="save()">Guardar Evento</button>
-            <pre class="json" id="json"></pre>
+            <button class="btn btn-primary" onclick="addSector()">Add Sector</button>
+            <button class="btn btn-success" onclick="save()">Save Event</button>
         </div>
         <div class="preview">
-            <div class="stage">ESCENARIO</div>
+            <h1 class="stage">SCENERY</h1>
             <div class="grid-container" id="grid">
-                <div class="toast" id="toast"></div>
+                <div class="toastdiv" id="toast"></div>
             </div>
         </div>
     </div>
-    <footer class="footer-add-event">
+    <footer class="footerevent">
         <p class="text-footer">All rights reserved.</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="./js/views/addEvent.js"></script>
 </body>
 
