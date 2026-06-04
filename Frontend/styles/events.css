@@ -1,3 +1,26 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.navindexevent{
+    padding: 2rem;
+}
+
+.footerevent{
+    padding: 2rem;
+}
+
 .bodyindex{
     display: flex;
     flex-direction: column;
@@ -75,4 +98,23 @@
 .sectors {
     margin-top: 1rem;
     font-size: 0.9rem;
+}
+
+.pagination{
+    padding-bottom:2rem;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+}
+
+.page-number{
+    font-size: clamp(0.5rem, 1vw + 0.5rem, 2rem);
+    padding:0.5rem;
+    margin:0.5rem;
+}
+
+.current-page{
+    font-weight:bold;
+    font-size: clamp(0.5rem, 1vw + 0.5rem, 2.5rem);
 }

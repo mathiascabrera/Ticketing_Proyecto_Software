@@ -4,15 +4,16 @@ class EventsService {
 
     constructor() {
         this.baseUrl = "https://localhost:7269/api/v1/events";
+
     }
 
-    async getEvents() {
+    async getEvents(page = 1) {
 
         try {
 
             const token = authService.getToken();
 
-            const response = await fetch(this.baseUrl, {
+            const response = await fetch(`${this.baseUrl}?Page=${page}&PageSize=10`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

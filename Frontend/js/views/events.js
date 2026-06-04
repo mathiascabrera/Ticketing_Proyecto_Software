@@ -1,22 +1,55 @@
 import { eventsService } from '../services/eventsService.js';
 import { renderEvents } from '../components/eventCard.js';
 
-async function loadEvents() {
+async function loadEvents(pageNumber=1) {
     console.log('Loading events...');
-    const events = await eventsService.getEvents();
-    console.log('Events loaded:', events);
+    const eventsResponse = await eventsService.getEvents(pageNumber);
+    const events = eventsResponse.items;
+    const totalPages = eventsResponse.totalPages;
+    const page = eventsResponse.page;
+    console.log('ACA:', page);
     
     if (events.length > 0) {
         renderEvents(events, 'eventsContainer');
+        if(totalPages > 1){
+            renderPagination(totalPages, page);
+        }
     } else {
         console.log('No events found');
     }
 }
 
-document.addEventListener('DOMContentLoaded', loadEvents);
+function renderPagination(totalPages, currentPage) {
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+    const title = document.createElement("h1");
+    title.textContent = "View other events:";
+    pagination.appendChild(title);
+
+    const div = document.createElement("div");
+
+    for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.classList.add("page-number");
+
+        if (i === currentPage) {
+            btn.classList.add("current-page");
+        }
+
+        btn.addEventListener("click", () => {
+            loadEvents(i);
+        });
+
+        div.appendChild(btn);
+    }
+    pagination.appendChild(div);
+}
+
+document.addEventListener('DOMContentLoaded', loadEvents());
 
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadEvents);
+    document.addEventListener('DOMContentLoaded', loadEvents());
 } else {
     loadEvents();
 }
@@ -32,22 +65,18 @@ function getRoleFromToken() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-   // alert(" events.js está ejecutándose");
     const role = getRoleFromToken();
     const container = document.getElementById("eventsContainer");
 
     console.log("ROLE:", role);
 
     if (role && role.toLowerCase() === "admin") {
-
         const btn = document.createElement("button");
         btn.className = "btn btn-primary mt-3";
         btn.innerText = "⬅ Volver al admin";
-
         btn.onclick = () => {
             window.location.href = "./homeAdmin.html";
         };
-
         container.appendChild(btn);
     }
 });
