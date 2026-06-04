@@ -10,6 +10,7 @@ class ScenarioView {
         this.toast = new Toast("toast");
         this.reservationId = null;
         this.reservedMode = false;
+        this.timerInterval = null;
 
         this.init();
     }
@@ -32,7 +33,7 @@ class ScenarioView {
         try {
             const sectors = await reservationService.getSeats(this.eventId);
             console.log('Seats loaded:', sectors);
-            
+
             this.seatMap = new SeatMap("map", (seat) => this.handleSeatClick(seat));
             this.seatMap.render(sectors);
         } catch (error) {
@@ -45,7 +46,7 @@ class ScenarioView {
         document.getElementById("btnReserve").addEventListener("click", () => this.reserve());
         document.getElementById("btnConfirm").addEventListener("click", () => this.confirm());
         document.getElementById("btnCancel").addEventListener("click", () => this.cancel());
-        document.getElementById("arrow").addEventListener("click",() => this.goTo())
+        document.getElementById("arrow").addEventListener("click", () => this.goTo())
     }
 
     async handleSeatClick(seat) {
@@ -79,7 +80,8 @@ class ScenarioView {
             console.log(data);
             this.reservationId = data.reservationId;
             this.reservedMode = true;
-            
+            this.startReservationTimer(data.expiresAt);
+
             this.updateUIState();
             this.toast.show("Reserve created");
             await this.loadSeats();
@@ -97,24 +99,33 @@ class ScenarioView {
     async confirm() {
         try {
             await reservationService.confirmReservation(this.reservationId);
-            this.toast.show("Confirmed purchase");
-            
+
             this.resetState();
             await this.loadSeats();
+            setTimeout(() => {
+                this.toast.show("Confirmed purchase");
+                this.goTo();
+            }, 2000);
+
         } catch (error) {
             this.toast.show("Error confirming purchase");
         }
     }
 
     goTo() {
-        if(localStorage.getItem('role') === "Admin"){
+        if (localStorage.getItem('role') === "Admin") {
             window.location.href = './eventsAdmin.html';
-        }else{
+        } else {
             window.location.href = './events.html';
         }
     }
 
     cancel() {
+
+        clearInterval(this.timerInterval);
+
+        document.getElementById("reservationTimer").textContent = "";
+
         this.resetState();
         this.loadSeats();
     }
@@ -148,6 +159,44 @@ class ScenarioView {
 
         this.seatMap.toggleReservedMode(false);
     }
+
+    startReservationTimer(expiresAt) {
+
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+        }
+
+        const timerElement = document.getElementById("reservationTimer");
+
+        this.timerInterval = setInterval(() => {
+
+            const now = new Date();
+            const expiration = new Date(expiresAt);
+
+            const diff = expiration - now;
+
+            if (diff <= 0) {
+                clearInterval(this.timerInterval);
+                timerElement.textContent = "Reservation expired";
+                setTimeout(() => timerElement.style.opacity = 0, 2000);
+
+                this.resetState();
+                this.loadSeats();
+                this.seatMap.clearSelection();
+                this.goTo();
+                return;
+            }
+
+            const minutes = Math.floor(diff / 1000 / 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            timerElement.textContent =
+                `Time remaining: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        }, 1000);
+    }
+
+
 }
 document.addEventListener('DOMContentLoaded', () => {
     new ScenarioView();

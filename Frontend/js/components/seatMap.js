@@ -87,10 +87,7 @@ calculateGrid(sectors) {
 
         inner.className = cls;
         inner.innerText = seat.rowIdentifier + seat.seatNumber;
-        /* console.log(seat) */
         inner.onclick = () => this.onSeatClick(seat); 
-        /* inner.onclick = () => console.log(seat); */
-        /* inner.onclick = () => handleSeatClick(seat); */
         return inner;
     }
 

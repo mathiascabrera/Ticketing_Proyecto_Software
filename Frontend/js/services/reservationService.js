@@ -11,10 +11,11 @@ class ReservationService {
 
 async getSeats(eventId) {
 
-    try {
-        const response = await fetch(`${API_BASE}/v1/${eventId}/seats`, {
+    try {     //////////////////cambiar 1 por eventId luego
+        const response = await fetch(`${API_BASE}/v1/${1}/seats`, {
             headers: {
-                "Authorization": `Bearer ${this.token}`
+                "Authorization": `Bearer ${this.token}`   
+                
             }
         });
         if (!response.ok) {
@@ -34,6 +35,7 @@ async getSeats(eventId) {
                 headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${this.token}`
+                  
                 },
                 body: JSON.stringify({ seatsIds: seatIds })
             });
@@ -59,7 +61,7 @@ async getSeats(eventId) {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${this.token}`
-                },
+                },    
                 body: JSON.stringify({ reservationId })
             });
 

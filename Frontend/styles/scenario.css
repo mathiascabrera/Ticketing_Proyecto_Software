@@ -119,3 +119,11 @@ button:disabled {
 #toast.show {
     opacity: 1;
 }
+
+.reservation-timer {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff4444;
+    margin-bottom: 20px;
+}
